@@ -1,0 +1,13 @@
+// Create a custom request handler for the /classify route.
+// For more information, see https://nextjs.org/docs/app/building-your-application/routing/router-handlers
+
+import { NextResponse, NextRequest } from "next/server";
+import { milvus, COLLECTION_NAME } from "../milvus";
+
+export async function GET(req: NextRequest) {
+  const searchParams = req.nextUrl.searchParams;
+  const expr = searchParams.get("expr") || "";
+  const result = await milvus.query({ expr, collection_name: COLLECTION_NAME });
+
+  return NextResponse.json(result);
+}
