@@ -5,15 +5,14 @@ import { NextResponse, NextRequest } from "next/server";
 import path from "path";
 import fs from "fs/promises";
 import Papaparse from "papaparse";
-import { loadStatus } from "./status";
-import { embedder } from "../../transformer/embedder";
-import { COLLECTION_NAME, milvus } from "../milvus";
+import { embedder } from "../../../utils/embedder";
+import { COLLECTION_NAME, CSV_KEYS, milvus } from "../../../utils/milvus";
+export const dynamic = "force-dynamic";
 
 export async function GET(req: NextRequest) {
+  const searchParams = req.nextUrl.searchParams;
+  const onlyCsv = searchParams.get("onlyCsv") || false;
   try {
-    if (loadStatus.currentData) {
-      return NextResponse.json({ data: "Csv data is loading ... " });
-    }
     const csvAbsolutePath = await path.resolve("test.csv");
     const data = await fs.readFile(csvAbsolutePath, "utf8");
 
@@ -22,26 +21,29 @@ export async function GET(req: NextRequest) {
       header: true,
       skipEmptyLines: true,
     });
+    if (onlyCsv) {
+      return NextResponse.json(parsedData.data);
+    }
     const total = parsedData.data.length;
-    parsedData.data.forEach(async (row: any, index: number) => {
-      const data = await embedder.embed(row.question1);
-      const res = await milvus.insert({
-        fields_data: [
-          {
-            id: row.test_id,
-            vector: data.values,
-            question1: row.question1,
-            question2: row.question2,
-          },
-        ],
-        collection_name: COLLECTION_NAME,
+    const insertDatas = [];
+    for (let i = 0; i < total; i++) {
+      const row = parsedData.data[i] as any;
+      const data = await embedder.embed(row[CSV_KEYS.QUESTION]);
+
+      insertDatas.push({
+        id: row[CSV_KEYS.ID],
+        vector: data.values,
+        question: row[CSV_KEYS.QUESTION],
+        answer: row[CSV_KEYS.ANSWER],
       });
-      console.log("---insert data", res, index, total);
-      loadStatus.percent = Math.round(((index + 1) / total) * 100);
-      loadStatus.currentData = total === index + 1 ? undefined : data;
-      console.log("---loadStatus", loadStatus);
+    }
+    console.log("--- insertDatas", insertDatas.length);
+    const res = await milvus.insert({
+      fields_data: insertDatas,
+      collection_name: COLLECTION_NAME,
     });
-    return NextResponse.json(parsedData);
+    console.log("----res", res);
+    return NextResponse.json(res || {});
   } catch (err) {
     console.error(err);
     return NextResponse.json(err);

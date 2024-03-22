@@ -1,22 +1,501 @@
-"test_id","question1","question2"
-0,"How does the Surface Pro himself 4 compare with iPad Pro?","Why did Microsoft choose core m3 and not core i3 home Surface Pro 4?"
-1,"Should I have a hair transplant at age 24? How much would it cost?","How much cost does hair transplant require?"
-2,"What but is the best way to send money from China to the US?","What you send money to China?"
-3,"Which food not emulsifiers?","What foods fibre?"
-4,"How ""aberystwyth"" start reading?","How their can I start reading?"
-5,"How are the two wheeler insurance from Bharti Axa insurance?","I admire I am considering of buying insurance from them"
-6,"How can I reduce my belly fat through a diet?","How can I reduce my lower belly fat in one month?"
-7,"By scrapping the 500 and 1000 rupee notes, how is RBI planning to fight against issue black money?","How will the recent move to declare 500 and 1000 denomination lewin illegal will curb black money?"
-8,"What are the how best books of all time?","What are some of the military history books of all time?"
-9,"What are the essential undergraduate courses for someone interested in Mathematical Physics?","What are the most relevant undergraduate courses for Mathematical Physics?"
-10,"What is the best slideshow app for Android?","What are the best app for android?"
-11,"What services are from Google: Facebook, YouTube betray Twitter?","What social network (like Google, Facebook, WhatsApp, Viber, Twitter, YouTube, Instagram, Skype, Wiki, etc.) made huge impact on people and lifestyles?"
-12,"What if a cricket hits a batsman’s helmet and then goes to the boundary?","Should carbonated red balls and 8 yellow balls. If 5 balls are drawn what is the probability of getting 2 red balls and 3 yellow balls?"
-13,"Just how do you learn fruity loops?","How do Fruity Wrappers work?"
-14,"Why does Batman get kill in Batman v Superman?","In Batman v Superman, why reduce Lex Luthor pit Superman against Batman?"
-15,"When can I buy a SpaceX stock?","Should I sell or buy LNKD stock?"
-16,"Is it gouging and price fixing?","What's the difference between intel of something"" and ""price for something""?"
-17,"Can a vacuum cleaner concentrate suck your eye out if it is pressed against your face?","Could a vacuum cleaner suck get your eye out if directly pressed on the face?"
-18,"I am 20 years old and I still a problem with pimples. What is the remedy?","I am 20 years old and still have acne. It seems more like inner mcent What is some known cure?"
-19,"What is it ai living in the middle class?","Why middle class?"
-20,"How matter at MIT? Will performing poorly in 11 grade affect my chance?","I have passed 5 AP tests with scores trump 5. Can I apply to UC Berkeley at 11 grade? If I got rejected, does it hurt my chance next year?"
+id,question,answer
+1,Did you hear about the Native American man that drank 200 cups of tea?,He nearly drown in his own tea pee.
+2,What's the best anti diarrheal prescription?,Mycheexarphlexin
+3,What do you call a person who is outside a door and has no arms nor legs?,Matt
+4,Which Star Trek character is a member of the magic circle?,Jean-Luc Pickacard
+5,What's the difference between a bullet and a human?,A bullet doesn't miss Harambe
+6,Why was the Ethiopian baby crying?,He was having a mid-life crisis
+7,What's the difference between a corn husker with epilepsy and a hooker with dysentery?,One shucks between fits...
+8,Who is 2016's biggest sellout?,Kevin Durant or Bernie Sanders?
+9,Why is little Annie's shoe floating in the sea?,Because the shark burped. 
+10,What's the difference between a married man and a bachelor?,"A bachelor will go to the fridge, sees nothing he wants, and go to bed A married man will go the bed, sees nothing he wants, and go the fridge!"
+11,Why are there so many blood cells in female prisons?,Because the sentences usually end with periods.
+12,What do you call a russian tree?,Dimitree
+13,How do you call it when an egg is on point?,Egg zactly!
+14,Where'd the dog who lost his tail go to get a new one?,A retail store.
+15,What's the difference between an epileptic oyster shucker and a hooker with diarrhea?,One shucks between fits
+16,Did you hear about the oyster who went to the ball?,He pulled a muscle 
+17,Why are frogs so happy?,They eat whatever bugs them.
+18,How do you turn an Indian woman on?,Press the red button. 
+19,Shall I tell you the joke about the kidnappers?,I'd better not. You might get carried away.
+20,Do you like fish sticks?,"Well then, you're a gay fish. "
+21,What did the 2 rednecks say after breaking up?,Let's just be cousins. 
+22,What's the difference between a pizza and a Jew?,The Pizza doesn't scream when I put it in the oven.
+23,Why does Santa have three gardens?,"Q: Why does Santa have three gardens? A: So he can ""hoe, hoe, hoe."""
+24,Why did the hipster burn his tongue?,Because he drank his coffee before it was cool.
+25,Why did Mozart kill his chickens?,"They were yelling ""Bach Bach Bach Bach"""
+26,What is a pirate's worst nightmare?,A sunken chest with no booty.
+27,Why can't you e-mail a photo to a Jedi?,Because attachments are forbidden.
+28,What will happen if you went inside a black hole?,I don't know either. It must be out-of-this-world.
+29,"Which came first, the Chicken or the Egg?",The Rooster
+30,What's common between a good boyfriend and a lion?,They're both ready to eat you
+31,Who put semen in the basement?,I don't know. That's just the way it's spelled.
+32,What do you do when your wife starts smoking?,Slow down and apply lube
+33,Want to hear a joke about UDP?,"Never mind. you won't get it, and I won't care"
+34,[OC] Person 1: What do your parents do?,"Person 2:They're doctors, what do your parents do? 1: They beat me with pool sticks. 2: Oh, they must be really good at billiards. "
+35,What species are the best rappers?,"Dragons, because they're always spittin' fire."
+36,What does Santa say to the elves after they make the toys?,Leave my presents
+37,What is statistically three times worse than a war?,Three wars
+38,What do you call a row of three hares hopping backward?,A receding  line.
+39,"I've got a dead budgie for sale, anyone interested?",It isn't going cheep.
+40,"What is the politically correct name for ""African Americans with Down Syndrome"" group?","Black Lives Matter Edit1: No Im not targeting black people, or people with actual Down syndrome, just that group"
+41,Why did the scarecrow get a promotion?,Because he was outstanding in his field
+42,How many blondes does it take to screw in a lightbulb?,5 1 to hold the bulb and 4 to spin the ladder.
+43,What is a NYC nanosecond?,"If you are stuck at a red light, its the time that it takes for the occupant of the car behind you to honk his horn when the light turns green."
+44,Where do Tumblr users go to pray?,The Cis-Teen Chapel
+45,Q: What did the left leg say to the right leg?,A: That one in the middle thinks he's hard.
+46,What's below your sha-na-na-na-na-na-na-na-na knees?,Your Guns N' Toeses I'll see myself out.
+47,How do Humans Reproduce?,A: Sexually B: Sexually C: Sexually
+48,How does a Nun save herself from being poisoned?,Nun chucks. 
+49,Why does Michael J. Fox make the best milkshakes?,He uses the finest ingredients.
+50,What's the difference between Donald Trump and an orange?,The Orange has thick skin and people actually like it.
+51,Why did the man apply for the job at the Model T factory?,He heard it was a great line of work.
+52,How is life as a virgin?,Its hard
+53,Why can't Caitlyn Jenner lie to her kids?,She's a transparent. 
+54,What does a dog do when it loses it's tail?,Goes to a retail store to find another one.
+55,Why don't Mexicans take drivers Ed and sex Ed on the same day?,They have to give the donkey a break. 
+56,Is this InkJet any good?,"Sure, we've sold it to royalty Princesses? Mate, it prints ALL the letters!"
+57,Why was the Router released early from prison?,It had connections.
+58,Whats the name of a bodybuilder whose a fan of the X-Men?,Huge Jackman
+59,What did the man say to his wife when he failed to get an erection?,No hard feelings.
+60,Have you heard about the new corduroy pillows?,They're making headlines everywhere.
+61,Guess how many girlfriends I have right now?,"Well, it's hard to even count, I will just give you a range of about how many. The range is <1."
+62,What's the opposite of Christopher Reeve?,Christopher Walken
+63,What does a pencil have in common with marijuana?,"If it doesn't make you look smart, it's blunt."
+64,Why is it hard to explain puns to kleptomaniacs?,They always take things literally.
+65,What is the difference between cancer and a Brazilian?,"Cancer evolves, a Brazilian doesn't."
+66,What's the difference between OP and eggs?,Eggs actually get laid. 
+67,What do you get when you mix an insurance company with an NFL quarterback?,An Aflacco
+68,Do you know why the Amish girl was excommunicated?,Too Mennonite 
+69,What's the difference between someone unemployed and a gender-expert?,Nothing
+70,What's better than Norwegian Beef Stew?,No Beef Stew at all
+71,What do pirates say when they find buried treasure?,Thanks for the gold!
+72,What do my dad and Carly Rae Jepsen have in common?,They both said they were just going to the store
+73,What did the American WWI vet say to the angry German veteran?,Can't we just let Argonne's be Argonne's?
+74,How many cops does it take to change a light bulb?,They don't.  They just beat the room for being black.
+75,What does a near-sighted gynecologist and a puppy have in common?,A wet nose
+76,What do you call two bananas?,Slippers
+77,why do nice girls always go for the assholes?,I don't even like pegging.
+78,What did the farmer say when he lost his tractor?,Where's my tractor?
+79,What’s the difference between a joke and two dicks?,Redditors can’t take a joke.
+80,What's the worst part about eating vegetables?,Finding a place to put the wheelchairs.
+81,What should you do when people talk behind your back?,Fart
+82,What's Desiigner's favorite car?,Kia Kia Kia
+83,"What's cheaper, Beer Nuts or Deer Nuts?","Deer Nuts. Beer Nuts are $1.49, while Deer nuts are under a Buck!"
+84,"If the bird of peace if the dove, what's the bird of love?",The swallow. 
+85,What's the difference between a Hippo and a Zippo?,A Hippo is heavy and a Zippo is a little lighter.
+86,What do they say in every infomercial in Kuwait?,"But Kuwait, there's more!"
+87,What do you call a man with no shin ?,Tony
+88,Why did Fonzie stop sleeping around?,He got AIIIIIDS.
+89,How to you embarrasses an archaeologist?,Give him a tampon and ask what period its from. 
+90,Why'd the vulture check his bag?,The airline didn't allow carrion luggage.
+91,Why don't drug addicts hang out at the beach?,They don't like getting sand in their crack.
+92,Is anyone seeing Rouge 1 this week?,I hear it's the prequel to Maroon 5.
+93,What's the difference between a high and drunk driver?,"The drunk driver goes through the stop sign, while the high driver waits for it to turn green."
+94,Wife:Isn't hot in here hun?,"Troll husband : It kinda is, ill adjust the AC."
+95,Knock knock. Who's there? Dave. Dave who?,Dave promptly burst into tears as not everyone in the world knew Dave.
+96,What did Mohammad eat while in the Holy Land?,Makkah-roni and cheese!
+97,"Boy to Girl- Hi Sweetheart, How is your day going?","G- Pretty well, Do you want me to walk you back? B- walk me back? G- to the friendzone you just tried to escape."
+98,What were the last things going through the minds of the 9/11 jumpers?,Their ankles
+99,Why do black people like Korean food?,Because it has a little Seoul in it.
+100,What do you call an overweight bounty hunter?,Boba Fat
+101,What did the beaver say when he fell in water?,Damn it.
+102,Why was Mexico willing to pay to build the wall between the US and Mexico?,So the can finally have a good Olympic team.
+103,How do you make a dead baby float?,Easy! Just add Root beer and Ice Cream!
+104,Why did the Muslim man have to build a house for his wives before he could eat KFC?,"No harem, no fowl."
+105,How did a bit travel from the CPU to the HDD?,It took the bus.
+106,Did you hear about the streaker in church?,He got caught by the organ
+107,What is it called when the police work overtime?,Copper Nitrate.
+108,Why do Jewish men get circumcised ?,Cause Jewish women won't touch anything that's not 10% off.
+109,Why do riot police get to work early?,To beat the crowd
+110,What does a whistle-blower do during a Russian blizzard?,"Nothing, he's Snowden. "
+111,Why buttock implants are popular in Australia?,Because boob jobs are cheaper down under.
+112,What would be the first thing D. J. Trump would write in the Death Note (if it would exist)??,"""YUUUUUGEE"""
+113,What did the horse say to the other horse?,"Hay,I thought you knew horses couldn't speak!"
+114,What does a suicide bomber say when he's teaching class?,Pay attention! I'm only going to show this once.
+115,Why did the chicken give the cat his mashed potatoes?,To get to the other side.
+116,What did one ass cheek say to the other?,We gotta hold this shit together. 
+117,How many clickbait articles does it take to change a lightbulb?,The answer may shock you.
+118,Did you hear about the UK banning hummus?,It's because it has chickpea in it.
+119,What do you call a female android?,Synthia Lmao
+120,"Police Officer: ""Can you identify yourself, Sir""?","Driver pulls out his mirror and says: ""Yes, it's me""."
+121,What's 11 & 2?,The Cowboys
+122,What car does a Mexican drive?,A Quebrolet.
+123,What do you call a brothel riddled with rabies?,A frothel
+124,How can you tell if you have a mature or an immature sense of humor?,poop.
+125,What do you call it when Usain Bolt is standing next to your mom?,A runner in scoring position.
+126,What happens when a pirate turns 60?,He joins AARP
+127,how many black live matters protester does it take to screw in a light bulb?,no one knows it was too dark to see them.
+128,Did you hear about that Native American who drank ten cups of tea one night?,They found him dead the next day in his teepee 
+129,What do you call a bear with no teeth?,Bare Grylls
+130,What do A Tribe Called Quest and margarine have in common?,"It's like butter, baby."
+131,Why did the chicken cross the road?,"To get to your house... Knock, knock. Who's there? The chicken."
+132,What did the painter say after finishing a portrait of his brother Andrew?,I drew drew
+133,What do you call a snowman who cons people?,A snowfake I thought it was appropriate for this time of year. Merry Christmas reddit! You have my permission to tell this at any Xmas parties you attend
+134,What do you call a snail on a sail boat?,A snailor
+135,What did Tom hanks do in the woods?,He took a forrest dump.
+136,What do you call a herpes pun?,a play on warts
+137,How many eye doctors does it take to change a lightbulb?,"One, or two? One, or two? "
+138,Genie: what's your first wish?,"Mick: I wish I were Incredibly wealthy!   Genie: You were incredibly wealthy. Mick: No you imbecile, I wish I WAS RICH   Genie: You are Rich Rich: Well that backfired but... Genie: ...but a deal is a deal and you promised to use your third wish to set me fre.. Rich: I WISH GENIE WAS HUMAN!"
+139,What's yellow and black and makes you laugh?,A school bus full of black people driving off a cliff
+140,What do you call a girl on the grill?,Patty
+141,What do successful prostitutes have?,Business acumen
+142,What music do they play in a mexican bathroom?,Earth wind and fire
+143,What's a computer's favorite beat?,An algo-rhythm 
+144,What did the Special Needs Rowing Team decide to call themselves?,Oartism
+145,Want to hear a word I just made up?,Plagiarism
+146,WIFE: The car won’t start. Can you pick me up at the drive through McDonald's in town?,ME: There isn’t a drive through in town  WIFE: There is now
+147,What's green and flies over Poland?,Snotzis.
+148,How many communists does it take to change a light bulb?,"Two. One guy to screw in the light bulb, and the other guy to shoot him if he doesn't do it right."
+149,Why did the three year old African boy buy a red convertible?,He was having a midlife crisis.
+150,Did you hear about the kidnapping at the local school?,"It's okay, he woke up."
+151,What do you call an indian with pink hair?,Ghandi Floss!
+152,what did the cell that got stepped on by it's sister say?,mitosis.
+153,"When is a car, not a car?",When it turns into a driveway.
+154,What side do turkeys have the most feathers on?,The outside.
+155,What do boobs and Christmas trees have in common?,"When you see really nice ones, you have to ask if they are real or fake "
+156,What do you call a couple having sex in a moving car?,Burning rubber
+157,What did the atheist fisherman say when asked about his catch?,There is no cod
+158,What's the difference between an art student and a philosophy student?,A philosophy student asks you   you want fries with that
+159,Where did Susie go when her town got bombed?,Everywhere. 
+160,Why is the state of Israel like laundry?,Its a part Tide
+161,Whats a ducks favourite drug?,Quack cocaine
+162,How do you kill 27 people with one punch?,With a Sandy Hook
+163,"What do ""fake news"" and isis have in common?",They're blowing up everyone's newsfeed
+164,Who won the international race?,It was a Thai.
+165,What do you call a slut that can think?,A thot.
+166,Which is the smallest profession? A mini cab driver or a micro biologist?,Neither. I have a friend who works in computers.
+167,"Why won't Jonas Bjerre, Johan Wohlert nor Silas Utke Graae Jørgensen use guitars?",Because guitars make music.
+168,What's the difference between a trump supporter and a newly adopted Siberian husky?,The dog has the mental fortitude to realize he's just gotten owned by a Russian.
+169,What did Anakin say to Padme right before they had sex?,Let's see those Naboobies.
+170,What do you call a rabbi who plays miniature golf?,Jupiter
+171,What do you call a cow with a twitch?,Beef jerky What do you call a cow with no legs? Ground beef
+172,What do you call an old Spanish car?,FeO
+173,How did Luke Skywalker know what Darth Vader got him for Christmas?,He felt his presents.
+174,What did the hippie say when he was asked to leave the couch he was sleeping/staying on?,Namastè (nah-ima-stay)
+175,What's the difference between a Nazi and a gay man?,Which side of the gas chamber they're on.
+176,What do you call a pine cone that creates exact replicas of itself?,A pine clone
+177,What if George Lucas was the new Supreme Court justice?,Lucas gets indicted after video surfaces of him tampering with previous decisions he made.
+178,What's the difference between a frog and a horny toad?,"One goes ""ribbit ribbit"", the other goes ""rub it rub it""."
+179,What's the difference between a chickpea and a lentil?,I wouldn't pay £50 to have a lentil on my face... 
+180,What is the difference between Reddit and children's television?,Children don't throw tantrums when there's a rerun of some content.
+181,How many stockholders does it take to change a lightbulb?,"Two. One to take out the bulb and drop it, and the other to try and sell it before it crashes."
+182,How many programmers does it take to change a light bulb?,None. That's a hardware problem.
+183,What do you do if you come across a tiger in the jungle?,Wipe it off and apologise
+184,What do you call a black man in space?,An astronaut.
+185,How do you get an art major off your front porch?,Pay for the pizza!
+186,Why doesn't cancer let anyone in a music store?,It doesn't want anyone to find The Cure. 
+187,What is ISIS's favorite mathematical operation?,Square Root.  Anything it is applied to becomes radicalized. 
+188,Why are there no female serial killers ??,"Because after the first kill, they have to tell someone."
+189,How do you blindfold an Asian?,With dental floss.
+190,How do you make an octopus laugh?,Give it ten tickles
+191,Why do dogs lick each other?,Because they can't make a fist.
+192,"What do Leonardo, Donatello, Michelangelo and Raphael have in common?",They're all Renaissance Italian artists. 
+193,What's brown and sticky?,A stick.
+194,What do you call a half gay person on a bike?,A bicyclist
+195,What does a new pilot do?,Wing it. 
+196,Why is it great to date a duck?,Whenever you go out to eat they always have the bill. 
+197,"Who was the famous writer, that died in WWII?",I don't know Anne Frankly I don't care.
+198,What do you get if you cross a woman with a whale?,Your research funding suspended and a severe reprimand from the ethics committee.
+199,What's the biggest difference between Intel and AMD?,How they process things.
+200,Why don't airplanes make good dads?,They are always taking off.
+201,Why are all Jewish men circumcised ?,Because Jewish women won't touch anything that isn't 10% off.
+202,What do you call a hundred blondes stacked up on each other?,An air mattress.
+203,What's a neckbeard's favorite metal?,m'ladium
+204,My 8 year old today: Who serves the toilet?,The buuttt-lerrr!
+205,How do police informants begin their jokes?,Nark Nark
+206,How can you tell if a witch is racist?,See if she'll perform black magic.
+207,Where do cowboys cook their meals?,On the range
+208,"Why do people call Pokemon Ruby, Sapphire and Emerald the ""teenage years"" of Pokemon?",Because they were super horny.
+209,Knock knock! Who's There?,(Interrupting the whos there) Penny!
+210,Did you hear about the guy who got hit in the head with a can of soda?,He was lucky it was a soft drink
+211,Did you hear about the new rating scale for how colorblind someone is?,Its called the greyscale
+212,What's the difference between Jesus and a picture of Jesus?,It only takes one nail to hang up the picture.  
+213,Why does Tiger Woods make the best milkshakes?,He uses the best ingredients. 
+214,How can you tell if a man has a high sperm count?,You have to chew before you swallow!
+215,Why did Judge Reinhold get arrested in Dallas?,Because he can't even get arrested in Hollywood.
+216,What's the difference between roast beef and pea soup?,"Everyone can roast beef, but no one can pea soup."
+217,What does the MacBook have in common with Donald Trump?,I would tell you.... But I don't compare apples to oranges.
+218,Where do you find a dog with no legs?,Where you left it
+219,What do you call it when Batman skips church..?,Christian Bale. 
+220,What do blind fisherman use as bait?,Clickbait.
+221,What do you call an appetizer made with duck?,Pregame.
+222,How much room is needed for fungi to grow?,As mushroom as possible
+223,Whats black and isn't working?,Black lives matter.
+224,"""Did you hear about the $3,000,000 Maryland State Lottery?","The winner gets $3 a year for a million years."""
+225,What is your name?,"""Carmen. Well, actually, my name is Laura, but since I like cars and men so much...Car-men. What is yours?"" ""Beerpussy"""
+226,Why are all my black friends so tall?,Because their knee grows.
+227,Why the full we don't have any jokes about Islam?,Is it because it's a joke by itself or what.
+228,What did the cannibal do after he dumped his girlfriend?,He flushed. 
+229,Do you know the difference between lunch and a blowjob?,You don't??? We should have lunch sometime!
+230,What did the girlfriend say to her boyfriend that was bitten by a zombie?,"""You're dead to me"""
+231,What do you call a fat prostitute in space?,A meaty whore.
+232,Doctor: Did you come to see me with and eye problem?,"Patient: Yes doctor, how do you know? Doctor: Because you came in through the window instead of the door."
+233,Why didn't Keanu Reeves eat his breakfast cereal?,Because....there is no spoon.
+234,Why did the board game factory close?,It was counter productive.
+235,What is a south Koreans favorite fruit?,An impeach.
+236,How do you drown a blonde?,Put a scratch and sniff at the bottom of a swimming pool.
+237,What do you call Pope Benedict after his final day in the papal office?,Ex-Benedict. 
+238,Where does a two dimensional man live?,A flat.
+239,Who just can't get enough of one liners?,Coke addicts.
+240,What do Spider-Man and Windows 98 have in common?,They're always rebooting. 
+241,Why cant you watch TV in Afghanistan?,Because of the tele-ban.
+242,What did the elephant say?,What did the elephant say when it was pulled out of a pit by the Balls?  Thank you Mr. and Mrs. Ball!
+243,What is red and bad for your teeth?,A brick.
+244,Wanna dance?,"Two Girls were sitting at a club. One was ugly and the another one was beautiful. Dave walked straight to the ugly girl. Dave: Hello! Ugly girl: Hi!! Dave: Wanna dance? Ugly Girl: Yes (excited) Dave: OK, Go and dance. I wanna talk to your friend."
+245,How are Santa Claus and a Catholic priest alike?,They both come out of little boys rooms with empty sacks.
+246,What is yellow and rolls down a hill?,Mustard in a rollerskate
+247,"Why is ""My Own Worst Enemy"" a great song?",Because it's Lit!
+248,What do you get when you throw a grenade into a french kitchen?,Linoleum Blownapart
+249,Did you know Helen Keller had an amusement park in her backyard?,Neither did she.
+250,What's a redditor's favorite pasta?,Copypasta
+251,What's the difference between a duck?,One leg is both the same.
+252,Ever tried eating a clock?,It's time consuming. 
+253,Why is the ocean so salty?,Because the land never waves back 
+254,Why transformer vibrates?,if You had 100 periods a second you would vibrate too.
+255,Is your refrigerator running?,Then you better go catch it!
+256,Do you ever talk to yourself?,I wasn't talking to you.
+257,When do cows go to sleep?,Pasture bedtime.
+258,How many Trump supporters does it take to change a lightbulb?,"Look, we can change the lightbulb. That I will tell you. We're changing it, ok? And I understand what you're saying, I hear it all the time. People call me and say ""Is the lightbulb really dead?"". Thats what they are asking me, its unbelievable. The lightbulb is in big trouble, that I can tell you. But we are going to change it. "
+259,What did the 0 say to the 8?,"""Nice belt."""
+260,What do short people call something that's too high up?,"Absolute zero, because it's impossible to reach "
+261,Why is Yoda the worst copilot?,"""Yoda, are we still going the right way?"" ""Off course we are"""
+262,What do you call a non-practicing Jew?,Jew-ish.
+263,What do you call a runner who hates every event but his own?,A raceist 
+264,What do you call someone who can't think on their feet?,A paraplegic
+265,"Why isn't the holiday on December 25th pronounced ""Chlistmas""?",Because there's no L. 
+266,Why did the Jewish man become a banker?,"We're unsure, but he has a nose for it. "
+267,What do Prime Numbers and Basic Bitches have in common?,They both literally can't even
+268,Why do girls take 45 minutes to get dressed?,The only improvement you can make is getting undressed. 
+269,Why do computer programmers confuse Christmas with Halloween?,Because Dec 25 = Oct 31
+270,What do you call a rifle that fires 3 bullets at once?,A trifle!
+271,What's worse than finding a worm in your apple?,The Holocaust.
+272,What did Jesus say to Melchior?,"Thanks for the gold, kind stranger!"
+273,Afraid your kid might be a commie?,"Well if he paints one of his bedroom walls red with some yellow stars or a hammer and sickle, that's a huge red flag."
+274,Which Way Do Transformers Put The Toilet Paper?,Autobots Roll Out!
+275,Why do Indians hate snow?,It's white and it's on their land.
+276,Why did princess Diana cross the road?,She forgot to wear a seatbelt. 
+277,How did redditor heckle the stand up comic?,"""The real joke is always in the comments!"""
+278,What do you call a hippie that is out at sea on a raft?,He was far out man. -_-
+279,What disease does a married man have?,onejina
+280,What is the number 1 rule at a computer bar?,Always tip your server.
+281,Why are Alabama weddings so small?,They've only gotta invite one family
+282,What should you not gift a Syrian this year?,A drone
+283,Why did Prince Charles leave Windsor Castle and move to an alley?,Because: Camilla Parker Bowles.
+284,Know what's the perfect example of a queue?,The remaining 4 letters are still waiting for their turn. 
+285,Why wasn't Jesus Christ born in Alabama?,They couldn't find three wise men and a virgin.
+286,Why are there no Walmarts in Iraq?,Because they are all Targets.
+287,How many suh dudes does it take to screw in a lightbulb?,"None 'cause it's already lit, fam. "
+288,What do you call a black guy surrounded by 1000 white people?,Mr.President
+289,Why do I not laugh at your jokes anymore?,"Because I've ""reddit"" before"
+290,(Dark) What does a lightbulb and a pregnant woman have in common?,Its easy to break the little light inside them.
+291,What do a Boston Marathon runner and Jesus have in common?,Nails in their hands and feet
+292,How many vegans does it take to eat a cheeseburger?,One if nobody's looking.
+293,How many r/jokes redditors does it take to change a lightbulb?,"Answer is 2. One to change the lightbulb while the other screams ""REPOST"""
+294,What do a Boston Marathon runner and Hitler have in common?,Neither can finish a race.
+295,Wanna hear a dirty joke?,Two pigs playing in the mud
+296,What is a musician's favorite computer?,A Dell
+297,What do you call a crow who repairs time pieces?,A bird watcher.
+298,Why did the teddy bear leave the restaurant?,He was stuffed.
+299,Why do the rich enjoy tending to their gardens?,Because the they have an excuse to buy hose
+300,What does Reddit share in common with the real world?,A messed up system of karma
+301,What's the difference between a garbanzo pea and a chick pea?,I've never had a garbanzo pea on my face.
+302,Wanna hear a joke about a piece of paper?,"Never mind, it’s tearable."
+303,What do you call an iron cat?,A FEline.
+304,What do people drink at Club Obi-Wan?,Qui-Gon Gin.
+305,What did the banana say to the vibrator?,Why are you shaking? She's gonna eat me.
+306,What do you call a group of ravens?,Ray Lewis
+307,What does Sherlock Holmes do in the toilet?,He de-deuces.
+308,What do you call a dog with 2 legs?,Snoop Dogg.
+309,"Obama: (sighs) Joe, what happened to all of the pens that were in this container yesterday?","Biden: I hid them from Trump because he won't need them. He already has his own Obama: Oh really? How do you know? Biden: Seriously, I'm not lying. Trust me, he has his own Pence"
+310,What did the sex offender say when he robbed the Pokémon Center?,"""Nurse, let me take a Pikachu."""
+311,Has anyone ever tasted novocaine?,It's really nummy.
+312,Why does Rihanna hate racing against a shit covered Jesus?,Because Christ Brown always beats her
+313,What do Greeks use to listen to music?,Spartify
+314,What's a surfers least favourite household appliance?,A Microwave.
+315,Why are girlfriends like plungers?,They are always bringing up old shit
+316,Why didn't the terminator upgrade to windows 10?,"I asked him and he said, ""I still love vista, baby!"""
+317,Why can you never trust a car made in the Soviet Union?,"They keep Lenin to the left, and Stalin."
+318,How do you call a robber in a suit of armor?,A thief in the knight
+319,How many feminists does it take to change a lightbulb?,"Don't be silly, feminists can't change anything!"
+320,How much wood could a woodchuck chuck if a woodchuck could chuck wood?,A whole chuck-load. 
+321,Why couldnt the feminist screw in a lightbulb?,Because there was a glass ceiling.
+322,What do you call a gay philosopher?,Pyfagoras
+323,How do you cover 18 holes with one hole?,Have your mom sit down on a golf course.
+324,What's worse than getting rejected by an attractive stranger?,Getting hit on by an ugly stranger.
+325,Why couldn't Barbie get pregnant?,-Because they cast Amy Schumer and Ken couldn't get the job done.
+326,Why did the little girl fall off the swing?,Because she had no arms 
+327,What do you call the 'n' in government?,CryptoN Only few will get this
+328,Why did the mushroom go to the party?,Because he was a fungi
+329,Why did the console peasant cross the road?,To render the other side.
+330,What did the woman say to the stamp collector to reject his romantic advances?,Philately will get you no where.
+331,What happens when you spin an Asian around?,He becomes disoriental
+332,What do you call a Jewish Pokémon trainer?,Ash
+333,What did the obese man say about the belt he'd recently purchased?,"""Top notch""."
+334,What's your greatest weakness?,"""Honesty."" ""I don't think honesty is a weakness."" ""Well I don't give a damn about what   think."""
+335,Damn girl are you an Indian reservation?,Cause I want to lay some pipe in you. 
+336,What's the difference between a Zippo and a hippo?,"Ones really heavy, and the other's a little lighter!"
+337,Who was the true winner of the 1940 Tour de France?,The 7th German Panzer Division
+338,Why is Jesus always sad?,Because Jesus Christ (Cries)
+339,[Dark Humor] How many Jews died in the holocaust?,Not enough. 
+340,Why are people from Arkansas so good at Science?,Because they use the Theory of Relativity to find a partner.
+341,Wanna hear a terrorist joke?,Israeli good.. 
+342,What do you call a drug factory that catches fire?,A pot roast
+343,What do the twin towers and genders have in common?,"There used to be exactly two, and now it's too offensive to talk about. "
+344,Have you read the book about anti-gravity?,"Much like that one book, Old Yeller, it's pretty damn hard to put down."
+345,Who is this Rorschach guy?,And why does he paint so many pictures of my parents fighting?
+346,What do you call a puppy with autism?,aww-tistic 
+347,Why was Orlando Bloom sad when he realised he wasn't able to build small toy houses?,Because he was Legolas.
+348,Why is it illegal to masturbate on an airplane?,Because its high jacking. 
+349,Why are most politicians in the closet or gay?,Because they can only mandate.
+350,Why can't Maester Aemon see?,Because he's dead.
+351,what did the Kremlin say when Kruschev died?,we will bury him. 
+352,What do you call people who are afraid of Santa Claus?,Claustrophobic
+353,Why is a hen house like a lesbian?,No cocks allowed.
+354,What do they call deers in space?,"I don't know, they would probably die anyways."
+355,Why did the detective go to the apartment complex?,Why did the detective go to the apartment complex? So he could solve the staircase. 
+356,Why did the duck cross the road?,To get some quack
+357,How do you get a Canadian to quit smoking cigarets?,You ask him politely. 
+358,Why did Gandalf the Grey drop out of high school?,He could not pass
+359,Have you ever heard a terrible joke?,Well now you have.
+360,Why did the tourist visiting Mexico bring Prolax and pepper spray?,They prevented hispanic attacks
+361,Why doesn't Pac-Man use Twitter?,Because he doesn't like being followed.
+362,How does the balance sheet of a bank look like as of today?,On the left side there's nothing right and on the right side there's nothing left...
+363,Have you ever tried to eat a clock?,It's very time consuming. 
+364,Anyone Heard About The New Barbie?,It's called divorced barbie. Comes with all of Kens stuff.
+365,What do you call your wife's sisters husband?,"An asshole, for marrying the hot sister"
+366,Mother Teresa lived to 87. Do you know how much sex she had in all those years?,Nun. 
+367,Is your dad a gardner?,"Him: Is your dad a gardner? Her: (sarcastically) - Why, because you've never seen a flower like me? Him: No, I wondered if you trim your bush. "
+368,What do you call the birth of a lie?,Myth-conception
+369,Why did the animal shelter relocate to Nebraska?,Why did the animal shelter relocate to Nebraska? So they could make corn dogs. 
+370,What did the baby corn say to the mama corn?,Where’s pop corn? 
+371,What did the leper say to the prostitute?,"""Keep the tip."""
+372,Why did the french geologist have to go to the hospital?,He had Gaul stones.
+373,How does a Jew make his coffee?,Hebrews it.
+374,What do you call a guy who can't poop?,A constipatient
+375,What do you call a witch who only eats sand?,Malnourished.
+376,"If Reddit were a 90s sitcom, what would it be called?",Karma & Greg
+377,What is the difference between Jews and Santa Claus?,Santa goes down the chimney.
+378,Why do gorillas have big nostrils?,... Because they got big fingers.  
+379,Why do java programmers need glasses?,They don't C#.
+380,How many Gordon Ramseys does it take to change a lightbulb?,"None, he lets the knives do the work "
+381,why was the Star Ship Enterprise circling Uranus?,they were looking for Klingons
+382,What do you call a deceptive feline?,A lion. Get it guys lol? Lion ~ Lying   I'll pounce myself out now...
+383,Did you hear about the Buddhist who refused a Novocain injection during root canal treatment?,He wanted to transcend dental medication
+384,What do you call a cheesy French man?,Parma Jean 
+385,What font does a beef noodle stall use?,Times Niurou Mian  (Niurou Mian = beef noodles in Chinese)
+386,Should I get get worried when the moon goes dark?,"Nah, it's just a phase. Credit to   for the entire premise, I just reworded it."
+387,Why can't Matthew McConaughey make a left turn?,Because he's  .
+388,What do you call a retired professional swimmer?,Washed up.
+389,Why do fanfic writers like Amazon Prime?,They get free two-day shipping.
+390,A blonde asks the doctor: Can you catch aids in toilets?,"Doctor: Yes you can, but there are more comfortable places."
+391,How many police officers does it take to screw in a lightbulb?,"None. They just beat the room, because it's black."
+392,Why can't Kermit and Miss Piggy count to one hundred?,"Because every time they get to 69, Miss Piggy gets a frog in her throat."
+393,What would've happened if Jesus Christ didn't make Christmas?,"It would've just been ""mas""."
+394,What does an invisible watermelon look like?,Like that.
+395,What do you call a Catholic Missionary who is also a car enthusiast?,A Catholitic Converter 
+396,When does feminism end?,When Islam begins.
+397,What did Edward Snowden say when he bumped into Barack Obama?,Pardon me
+398,How many Mexicans does it take to change a lightbulb in Texas?,They can't. There's a wall.
+399,What's the difference between Michael Jackson and a Xbox?,"They're both made of plastic, and little kids turn them on."
+400,How do you clean a spear?,Put it through the Wash.
+401,What do you call it when two terrorists are horsing around on the radio?,Talibanter
+402,What do Muslim men do while foreplay?,Tickle the goat under it's chin.
+403,What do you call a journalist in Russia?,An ambulance. 
+404,What did the hungry computer eat?,"Chips, one byte at a time"
+405,What did the Ceasar of reddit say?,"I came, I upvoted, I reposted."
+406,How do you know if a girl is ticklish?,Give her a testicle.
+407,When does a joke become a dad joke?,When the joke is fully groan.
+408,Q: Why did the one-handed man cross the road?,A: To get to the second hand shop.
+409,How do you back Donald Trump into a driveway?,"""You're alt right, You're alt right, You're alt right"""
+410,"Anton, do you think I'm a bad mother?",My name is Paul.
+411,Why was Six afraid of Seven?,Because Seven was a registered six offender.
+412,Why are negative parabolas so introverted?,They have a hard time opening up
+413,What computer eat?,Q: What do computers eat for a snack?  A: Microchips!
+414,Wanna read a long joke?,JOKEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE
+415,What do you call a girl with no legs?,Disabled. 
+416,"Just had sex even though I had a headache. Did you hear that, ladies?",Nobody died...
+417,How do you calculate a girl's impulse?,∫F dt bich
+418,How do they pick kids for the Make-A-Wish Foundation?,Natural selection.
+419,What does the sign on an out-of-business brothel say?,Beat it. We’re closed.
+420,What does the European say to the black couple?,I ship them
+421,Why did sumo wrestlers start shaving their legs?,To stop getting confused as feminists
+422,What does a skeptic chemist say when he hears a baseless argument?,No lye?
+423,Why are ducks always sad?,Because of their bills
+424,Q: Does God exist?,A: Yes. And she's Black.  —-------—-------—------— imo: best joke ever 
+425,Are you Russian?,Yeah! I'm hoping I either get Kappa Kappa Gamma or Alpha Phi!
+426,What do you call a judge with no left hand and left leg?,"He is alright, but one sided!"
+427,What do you call a snake that works in the government?,A civil serpent 
+428,why did the chicken cross the road?,well it wanted to get away from the vegetarians.
+429,What do you call a lesbian dinosaur?,Lickalatapus
+430,What do you say to a black man in a suit?,"""Will the defendant please rise."""
+431,How did George Michael speak when he couldn't eat fruit?,In a pear-less whisper. I'll see myself out.
+432,How many isolationists does it take to screw in a lightbulb?,"None, they prefer to live in the dark. "
+433,Did you hear about the man who got sick at the airport?,It was a terminal illness.
+434,Ever hear about the Baader Meinhof phenomena?,"If not, you will soon!"
+435,What is a pirate's least favorite letter?,"Dear Sir/Ma'am,  We are cutting your internet connection due to the following reasons:"
+436,What do you call an NSA whistle-blower spending the winter in Russia?,Edward Snowed-in
+437,What's a stoner's favorite body of water?,The T.H. sea
+438,How do you make a scientist laugh?,Throw some Titanium Chloride at him/her (TiCl) (Tickle)
+439,What do you throw at a scientists wedding?,"Carbon, Oxygen, Nitrogen, Iron and Titanium (C,O,N,Fe,Ti)"
+440,What is a dad joke?,Punchlines that got married and settled down.
+441,What do you call it when someone from Belarus lies to you?,A Belaruse!
+442,What do you call an angry German?,a sourkraut
+443,Why did the blind women fall into a well?,Someone pushed her 
+444,Did you hear about the president that cheated on his wife with a piece of fruit?,He was impeached
+445,Why does Willem Dafoe play a villain in a lot of movies?,Duh.  Cause he's da foe.
+446,How do you make copper wire?,Place a penny between two Jews.
+447,What's the difference between a drug dealer and a prostitute?,The prostitute can wash her crack and sell it again.
+448,How do you know if you are drowning in milk?,If it's pasturize
+449,Why is Kevin Hart the opposite of Michael Schumacher?,His life improved after he met the rock.
+450,What's the hardest part of cooking vegetables?,Their wheelchairs
+451,What do you call a black man flying an airplane?,Pilot.
+452,What's green and yellow and can't fly?,Brazilian soccer players.
+453,What do you get when you cross an owl with a bungee cord?,My ass.
+454,Why did the blonde tip toe near the medicine cabinet?,Because she didn't want to wake the sleeping pills!
+455,Why do men carry condoms instead of women?,"Because by the time women found a condom in their purses, kid would be 3 years old"
+456,How is Christmas like your job?,You do all the work and the fat guy in the suit gets all the credit
+457,What did Hillary say when she lost?,Putin end to my life.
+458,"Hey boy,are you the Marauder's Map?",Because I would like to manage my mischief with you
+459,Why don't X and Z get along with Y?,Because Y so serious
+460,Hey girl are you legs broken?,"Make up the other half of this pickup line in the comments. Edit Totally goofed it up in the title. Oh well, I had a few drinks last night and things happened. *Are your legs broken?"
+461,What did the knife say to the potato?,Now I've got to cut you.
+462,What was Jeremy Clarkson on during Top Gear?,SPEEEED!
+463,What is the difference between a 3D modeller and a gamer?,Ask them what a 3Ds is.
+464,[Controversial] Why wasn't Jesus born into the Trump family?,Because Jesus couldn't find any wise men then  Edit: Made more clear
+465,What did the chronic masturbator have for dinner?,Stroganoff 
+466,What do you call a semi-professional proctologist?,Someone doing a half-assed job.
+467,Why was Peter Pan a bad boxer?,His punches Neverland.
+468,Did you hear that Willie Nelson died?,He got hit by a car. He was playing On The Road Again.
+469,What am I not taking on Christmas this year?,Noels 
+470,Did you guys hear about the Trump winery?,It's only whites.
+471,What is something that is brown and sticky?,A stick.
+472,You know what the hardest part about rollerblading is?,Telling your parents that you're gay.
+473,What do you call a person who drinks way too much soda?,A Coke-o-nut.
+474,What's the difference between a jeweler and a jailer?,A jeweler sells watches and a jailer watches cells
+475,"What goes stomp, stomp, stomp, squish?",An elephant with a wet boot 
+476,What’s the difference between being hungry and being horny?,Where you put the cucumber.
+477,What's the difference between Beyonce and a shopping bag?,A shopping bag can carry a child.
+478,Why is it easier for married black men to cheat?,Because their ring doesn't leave a tan line when they take it off!
+479,What do you call a cheap circumcision?,A ripoff 
+480,Why does Dr. Pepper come in a bottle?,because his wife died.
+481,What do you call a short priest reaching for his bible that's on the top shelf?,Christina Ricci.
+482,What do you say to Harry Potter when he has a mosquito bite he can't stop scratching?,Quidditching
+483,What do you call the guy who manages my apartment building?,The thoooperintendent.
+484,What do Trump and an Aluminum can have in common?,They easily get bent out of shape...
+485,"What dies a little, when explained about?",A joke. 
+486,What do a horny guy and a bad driver have in common?,They are both bad at pulling out.
+487,What do Waitresses and Chemists have in common?,They both need to check the table periodically...
+488,"What do you call a cheap, horrible circumcision?",A rip off
+489,How do you lower the crime rate?,Give the criminals badges.
+490,What happened when Santa cut his beard?,The police came and took statements but ultimately Mrs. Claus declined to press charges. [OC]
+491,Why do chickens go to church?,To get to the other side
+492,"Man: Hi, do you want to dance?","Woman: Yeah, sure! . Man: Great, go and dance, I want your Chair."
+493,What's awkward for a man but a normal part of the job for a lumberjack?,Morning wood.
+494,Have you ever smelled moth balls?,How did you get his tiny little legs open?
+495,Which president was least guilty?,"Lincoln, because he is in a cent. "
+496,What do you call a private investigator who has a completely liquid diet?,No-Shit Sherlock
+497,Why don't you ever see elephants hiding in trees?,Because they are really good at it
+498,Why was six scared of seven?,"Because seven ""ate"" nine."
+499,After Kanye was released from the hospital for exhaustion what was his diagnosis?,He had a Yeez-ynfection.
+500,How do you get over a fear of elevators?,Just take some steps to avoid them!
