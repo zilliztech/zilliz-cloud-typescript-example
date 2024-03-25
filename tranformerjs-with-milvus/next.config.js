@@ -11,7 +11,7 @@ const nextConfig = {
       "@zilliz/milvus2-sdk-node",
     ],
     outputFileTracingIncludes: {
-      "/api/*": ["node_modules/@zilliz/milvus2-sdk-node/dist/proto/*"],
+      "/api/**/*": ["node_modules/@zilliz/milvus2-sdk-node/dist/proto/**/*"],
     },
   },
 };
