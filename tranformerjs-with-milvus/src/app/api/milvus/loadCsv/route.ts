@@ -13,7 +13,7 @@ export async function GET(req: NextRequest) {
   const searchParams = req.nextUrl.searchParams;
   const onlyCsv = searchParams.get("onlyCsv") || false;
   try {
-    const csvAbsolutePath = await path.resolve("test.csv");
+    const csvAbsolutePath = await path.resolve("./public", "test.csv");
     const data = await fs.readFile(csvAbsolutePath, "utf8");
 
     const parsedData = await Papaparse.parse(data, {
