@@ -37,10 +37,10 @@ class Milvus {
   public async init() {
     try {
       this._client = new MilvusClient({
-        address: process.env.MILVUS_URI || "",
-        token: process.env.MILVUS_TOKEN,
+        address: process.env.URI || "",
+        token: process.env.TOKEN,
         channelOptions: {
-          "grpc.keepalive_time_ms": 40000, // Adjust the time interval between pings
+          "grpc.keepalive_time_ms": 30000, // Adjust the time interval between pings
           "grpc.keepalive_timeout_ms": 5000, // Adjust the time to wait for a response to a ping
         },
       });
