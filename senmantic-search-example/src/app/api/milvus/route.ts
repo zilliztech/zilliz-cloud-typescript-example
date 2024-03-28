@@ -7,6 +7,7 @@ export const dynamic = "force-dynamic";
 
 export async function GET(req: NextRequest) {
   try {
+    // init milvus when page ready
     const result = await milvus.init();
     return NextResponse.json(result);
   } catch (error) {

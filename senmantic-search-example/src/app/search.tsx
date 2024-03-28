@@ -12,6 +12,7 @@ import {
 import axios from "axios";
 import { useEffect, useMemo, useState } from "react";
 
+// Define the structure of the CSV data
 interface csvDataType {
   id: string;
   question: string;
@@ -19,16 +20,18 @@ interface csvDataType {
 }
 
 export default function SearchPage() {
+  // Define state variables
   const [value, setValue] = useState("");
   const [data, setData] = useState<{ [x in string]: string }[]>([]);
   const [loading, setLoading] = useState(false);
   const [searchLoading, setSearchLoading] = useState(false);
   const [csvData, setCsvData] = useState<csvDataType[]>([]);
 
+  // Function to load CSV data
   const loadCsv = async () => {
     try {
       setLoading(true);
-      await axios.get(`/api/milvus/loadCsv`);
+      await axios.get(`/api/milvus/loadCsv?startRow=500`);
       window.alert("Load 500 QAs successfully");
     } catch (e) {
       window.alert(`Load 500 QAs failed:${e}`);
@@ -37,6 +40,7 @@ export default function SearchPage() {
     }
   };
 
+  // Function to perform search
   const search = async (text: string) => {
     try {
       setSearchLoading(true);
@@ -48,6 +52,7 @@ export default function SearchPage() {
     }
   };
 
+  // Define headers for the table
   const { headers } = useMemo(() => {
     if (data.length === 0)
       return {
@@ -57,6 +62,7 @@ export default function SearchPage() {
     return { headers };
   }, [data]);
 
+  // Initialize Milvus and load CSV data on component mount
   useEffect(() => {
     const initMilvus = async () => {
       try {
@@ -67,6 +73,7 @@ export default function SearchPage() {
         );
       }
     };
+    // prepare random question data
     const loadCsvData = async () => {
       const data = await axios.get("/api/milvus/loadCsv?onlyCsv=true");
       setCsvData(data.data as csvDataType[]);
@@ -75,6 +82,7 @@ export default function SearchPage() {
     loadCsvData();
   }, []);
 
+  // Function to perform search with a random question
   const searchByRandom = async () => {
     const randomIndex = Math.floor(Math.random() * csvData.length);
     const randomQuestion = csvData[randomIndex].question;
@@ -84,6 +92,7 @@ export default function SearchPage() {
 
   return (
     <main className="container mx-auto mt-40">
+      {/* Note: API requests may timeout on Vercel's free plan as it has a maximum timeout limit of 10 seconds */}
       <Button
         onClick={() => {
           loadCsv();

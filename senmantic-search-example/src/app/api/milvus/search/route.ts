@@ -9,9 +9,10 @@ export const dynamic = "force-dynamic";
 export async function POST(req: NextRequest) {
   try {
     const { text } = await req.json();
+    // embed
     const data = await embedder.embed(text);
     const result = await milvus.search({
-      vector: data.values,
+      vector: data.values as number[],
       collection_name: COLLECTION_NAME,
       output_fields: [CSV_KEYS.QUESTION, CSV_KEYS.ANSWER],
       limit: 10,

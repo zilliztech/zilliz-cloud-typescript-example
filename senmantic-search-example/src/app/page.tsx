@@ -5,7 +5,7 @@ const embedText = async (text: string) => {
   return await embedder.embed(text);
 };
 export default async function Home() {
-  // pulling model at first time
+  // This is server component, so we can pulling model when build
   await embedText("hello world");
   return (
     <div>

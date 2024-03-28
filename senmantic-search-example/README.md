@@ -29,3 +29,18 @@ TOKEN=USERNAME:PASSWORD or api key
 ```
 
 If using publish on Vercel , you need to set the corresponding environment variables in Vercel's settings.
+
+## Build
+
+To build the project please run the command:
+
+```
+npm run build
+```
+
+## Application structure
+
+### Utilities
+
+- `embedder`: This utility transforms natural language strings into vector embeddings. It utilizes the Xenova/all-MiniLM-L6-v2 model for this transformation.
+- `milvus`: This utility is responsible for establishing a connection with Milvus. It also provides functions to search and insert data, as well as to create collections.
