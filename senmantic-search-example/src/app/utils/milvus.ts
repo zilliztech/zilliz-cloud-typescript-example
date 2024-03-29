@@ -1,9 +1,11 @@
 import {
   InsertReq,
   MilvusClient,
+  MutationResult,
   QueryReq,
   SearchSimpleReq,
 } from "@zilliz/milvus2-sdk-node";
+import { embedder } from "./embedder";
 
 // Define constants for the Milvus client
 const DIM = 384; // model Xenova/all-MiniLM-L6-v2 embedding dimension
@@ -16,14 +18,21 @@ export enum CSV_KEYS {
   ID = "id",
   QUESTION = "question",
   ANSWER = "answer",
+  CSV_ID = "csvId",
 }
 
 // Define the Milvus class
 class Milvus {
   private _client: MilvusClient | undefined;
+  private _MAX_INSERT_COUNT = 100;
+  private _insert_progress = 0;
+  private _is_inserting = false;
+  private _error_msg = "";
 
   constructor() {
-    this.init(); // Initialize the Milvus client
+    if (!this._client) {
+      this.init(); // Initialize the Milvus client
+    }
   }
 
   // Get the Milvus client
@@ -40,6 +49,10 @@ class Milvus {
 
   // Initialize the Milvus client
   public async init() {
+    if (!process.env.URI) {
+      throw new Error("URI is required, please check your .env file.");
+    }
+
     try {
       this._client = new MilvusClient({
         address: process.env.URI || "",
@@ -50,7 +63,6 @@ class Milvus {
           "grpc.keepalive_timeout_ms": 5000, // Adjust the time to wait for a response to a ping
         },
       });
-      await this.listCollections(); // List all collections
       return await this.createCollection(); // Create a new collection
     } catch (error) {
       throw error;
@@ -68,7 +80,7 @@ class Milvus {
         collection_name: COLLECTION_NAME,
         dimension: DIM,
         metric_type: METRIC_TYPE,
-        auto_id: false,
+        auto_id: true,
       });
 
       return collectionRes;
@@ -98,12 +110,77 @@ class Milvus {
   // Insert data into a collection
   public async insert(data: InsertReq) {
     try {
-      console.log(data);
       const res = await this._client?.insert(data);
       return res;
     } catch (error) {
       throw error;
     }
+  }
+
+  public async batchInsert(
+    texts: { [key in CSV_KEYS]: string }[],
+    startIndex: number
+  ): Promise<MutationResult | undefined> {
+    try {
+      const total = texts.length;
+      const endIndex = startIndex + this._MAX_INSERT_COUNT;
+      const insertTexts = texts.slice(startIndex, endIndex);
+      this._is_inserting = true;
+
+      if (startIndex === 0) {
+        this._insert_progress = 0;
+      }
+      const insertDatas = [];
+      for (let i = 0; i < insertTexts.length; i++) {
+        const row = insertTexts[i] as any;
+        // embed question to vector by module all-MiniLM-L6-v2
+        const data = await embedder.embed(row[CSV_KEYS.QUESTION]);
+
+        insertDatas.push({
+          vector: data.values,
+          /**
+           * The question and answer are stored as dynamic JSON.
+           * They won't appear in the schema, but can be retrieved during a similarity search.
+           * */
+          csvId: row[CSV_KEYS.ID],
+          question: row[CSV_KEYS.QUESTION],
+          answer: row[CSV_KEYS.ANSWER],
+        });
+      }
+      console.log(
+        `--- ${startIndex} ~ ${endIndex} embedding done, begin to insert into milvus --- `
+      );
+      const res = await milvus.insert({
+        fields_data: insertDatas,
+        collection_name: COLLECTION_NAME,
+      });
+      this._insert_progress = Math.floor((endIndex / total) * 100);
+      console.log(
+        `--- ${startIndex} ~ ${endIndex} insert done, ${this._insert_progress}% now ---`
+      );
+      if (endIndex < total) {
+        return await this.batchInsert(texts, endIndex + 1);
+      }
+      this._insert_progress = 100;
+      this._is_inserting = false;
+      return res;
+    } catch (error) {
+      this._insert_progress = 0;
+      this._is_inserting = false;
+      this._error_msg = (error as any).message || "Insert failed";
+    }
+  }
+
+  get insertProgress() {
+    return this._insert_progress;
+  }
+
+  get isInserting() {
+    return this._is_inserting;
+  }
+
+  get errorMsg() {
+    return this._error_msg;
   }
 }
 

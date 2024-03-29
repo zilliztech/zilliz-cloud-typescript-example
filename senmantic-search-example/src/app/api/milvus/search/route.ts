@@ -14,7 +14,7 @@ export async function POST(req: NextRequest) {
     const result = await milvus.search({
       vector: data.values as number[],
       collection_name: COLLECTION_NAME,
-      output_fields: [CSV_KEYS.QUESTION, CSV_KEYS.ANSWER],
+      output_fields: [CSV_KEYS.QUESTION, CSV_KEYS.ANSWER, CSV_KEYS.CSV_ID],
       limit: 10,
     });
     console.log("result-----:", result);
