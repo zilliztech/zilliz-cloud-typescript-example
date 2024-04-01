@@ -1,11 +1,13 @@
-// Create a custom request handler for the /classify route.
-// For more information, see https://nextjs.org/docs/app/building-your-application/routing/router-handlers
-
 import { NextResponse, NextRequest } from "next/server";
 import { milvus, COLLECTION_NAME, CSV_KEYS } from "../../../utils/milvus";
 import { embedder } from "../../../utils/embedder";
 export const dynamic = "force-dynamic";
 
+/**
+ * Handles the POST request for searching in Milvus.
+ * @param req - The NextRequest object containing the request data.
+ * @returns A NextResponse object with the search result in JSON format.
+ */
 export async function POST(req: NextRequest) {
   try {
     const { text } = await req.json();

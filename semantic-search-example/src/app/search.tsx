@@ -1,5 +1,4 @@
 "use client";
-import { load } from "@grpc/proto-loader";
 import {
   Button,
   Input,
@@ -22,12 +21,17 @@ import React from "react";
 
 // Define the structure of the CSV data
 interface csvDataType {
-  id: string;
   question: string;
   answer: string;
 }
-const HEADERS = ["id", "score", "question", "answer"];
+
 let timer: NodeJS.Timeout | null = null;
+
+const HEADERS = ["id", "score", "question", "answer"];
+// Note: Load CSV file are hidden when deployed on Vercel.
+const SUPPORT_IMPORT =
+  process.env.NEXT_PUBLIC_SUPPORT_IMPORT?.toLocaleLowerCase() === "true";
+
 export default function SearchPage() {
   // Define state variables
   const [value, setValue] = useState("");
@@ -46,12 +50,15 @@ export default function SearchPage() {
   });
   const { isOpen, onOpen, onOpenChange, onClose } = useDisclosure();
 
+  // Function to get the progress of loading CSV data
   const getLoadCsvProgress = async () => {
+    // Fetch the progress data from the server
     const data = (await axios.get("/api/milvus/loadCsv/progress")).data;
     const progress = data.progress;
     const isInserting = data.isInserting;
     const errorMsg = data.errorMsg;
 
+    // If there is an error message, alert the user and stop loading
     if (errorMsg) {
       window.alert(errorMsg);
       setLoading((v) => ({
@@ -62,15 +69,19 @@ export default function SearchPage() {
       return;
     }
 
+    // Update the progress state
     setInsertProgress(progress);
+    // Update the loading state based on whether data is still being inserted
     setLoading((v) => ({
       ...v,
       insertCsv: isInserting,
     }));
+    // If progress is not complete or data is still being inserted, continue checking progress every second
     if ((progress < 100 && progress > 0) || isInserting) {
       timer = setTimeout(getLoadCsvProgress, 1000);
     }
 
+    // If progress is complete, stop loading and clear the timer
     if (progress === 100) {
       setLoading((v) => ({
         ...v,
@@ -87,12 +98,12 @@ export default function SearchPage() {
         ...v,
         insertCsv: true,
       }));
-      await axios.get(`/api/milvus/loadCsv?startRow=500`);
+      await axios.get(`/api/milvus/loadCsv`);
       setTimeout(() => {
         getLoadCsvProgress();
       }, 1000);
     } catch (e) {
-      window.alert(`Load 500 QAs failed:${e}`);
+      window.alert(`Load CSV file failed:${e}`);
       setLoading((v) => ({
         ...v,
         insertCsv: false,
@@ -117,7 +128,7 @@ export default function SearchPage() {
     }
   };
 
-  // Initialize Milvus and load CSV data on component mount
+  // Upon component mounting, initialize Milvus and load CSV data for utilization as random queries
   useEffect(() => {
     const init = async () => {
       try {
@@ -146,38 +157,59 @@ export default function SearchPage() {
     init();
   }, []);
 
-  // Function to perform search with a random question
+  // Function to search by random question
   const searchByRandom = async () => {
+    // Generate a random index
     const randomIndex = Math.floor(Math.random() * csvData.length);
+    // Get the question at the random index
     const randomQuestion = csvData[randomIndex].question;
+    // Set the value to the random question
     setValue(randomQuestion);
+    // Perform the search
     await search(randomQuestion);
   };
 
+  // Function to handle data insertion
   const handleInsert = async () => {
     try {
+      setLoading((v) => ({
+        ...v,
+        insert: true,
+      }));
+      // Post the form data to the insert API
       await axios.post(`/api/milvus/insert`, form);
+      // Close the modal after successful insertion
       onClose();
     } catch (e) {
+      // Alert the user if insertion fails
       window.alert(`Insert data failed:${e}`);
+      setLoading((v) => ({
+        ...v,
+        insert: false,
+      }));
     }
   };
+
   return (
     <main className="container mx-auto mt-40">
-      {/* Note: API requests may timeout on Vercel's free plan as it has a maximum timeout limit of 10 seconds */}
-      <Button
-        onClick={() => {
-          loadCsv();
-        }}
-        isLoading={loading.insertCsv}
-        isDisabled={loading.page}
-        className="fixed top-2 right-32"
-        variant="faded"
-      >
-        {!loading.insertCsv
-          ? `Load 1000 QAs`
-          : `Embedding and inserting ...(${insertProgress}%)`}
-      </Button>
+      {/* Note: API requests may timeout on Vercel's free plan as it has a maximum timeout limit of 10 seconds*/}
+      {SUPPORT_IMPORT && (
+        <Button
+          onClick={() => {
+            loadCsv();
+          }}
+          isLoading={loading.insertCsv}
+          isDisabled={loading.page}
+          className="fixed top-2 right-32"
+          variant="faded"
+        >
+          {!loading.insertCsv
+            ? `Load 1000 QAs`
+            : `Embedding and inserting ...(${insertProgress}%)`}
+        </Button>
+      )}
+
+      {/* Button to open the insert data modal */}
       <Button
         onPress={onOpen}
         className="fixed top-2 right-2"
@@ -188,6 +220,7 @@ export default function SearchPage() {
       </Button>
 
       <div className="flex flex-col gap-6">
+        {/* Input field for the user to enter text to search */}
         <Input
           value={value}
           placeholder="Enter your text to search"
@@ -195,6 +228,7 @@ export default function SearchPage() {
           onChange={(e) => setValue(e.target.value)}
         />
         <div className="flex gap-6 justify-between">
+          {/* Button to ask a random question */}
           <Button
             color="secondary"
             size="lg"
@@ -205,6 +239,7 @@ export default function SearchPage() {
           >
             Ask Random Question
           </Button>
+          {/* Button to perform the search */}
           <Button
             onClick={() => {
               search(value);
@@ -219,7 +254,9 @@ export default function SearchPage() {
           </Button>
         </div>
       </div>
+      {/* Display the answer to the first question */}
       <p className="mt-10 font-bold text-lg text-center">{data[0]?.answer}</p>
+      {/* Table to display the search results */}
       <Table aria-label="Search result table " className="mt-10">
         <TableHeader>
           {HEADERS.map((header) => (
@@ -240,6 +277,7 @@ export default function SearchPage() {
         </TableBody>
       </Table>
 
+      {/* Modal for inserting data */}
       <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
         <ModalContent>
           {(onClose) => (
@@ -248,6 +286,7 @@ export default function SearchPage() {
                 Modal Title
               </ModalHeader>
               <ModalBody>
+                {/* Input field for the question */}
                 <Input
                   value={form.question}
                   onChange={(e) =>
@@ -256,6 +295,7 @@ export default function SearchPage() {
                   label="Question"
                   placeholder="Enter your question"
                 />
+                {/* Input field for the answer */}
                 <Input
                   value={form.answer}
                   onChange={(e) =>
@@ -266,9 +306,11 @@ export default function SearchPage() {
                 />
               </ModalBody>
               <ModalFooter>
+                {/* Button to close the modal */}
                 <Button variant="light" onPress={onClose}>
                   Close
                 </Button>
+                {/* Button to insert the data */}
                 <Button
                   color="primary"
                   onPress={handleInsert}

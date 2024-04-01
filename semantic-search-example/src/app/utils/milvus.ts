@@ -20,7 +20,6 @@ export enum CSV_KEYS {
   CSV_ID = "csvId",
 }
 
-// Define the Milvus class
 class Milvus {
   private _client: MilvusClient | undefined;
   private _MAX_INSERT_COUNT = 100;
@@ -48,11 +47,13 @@ class Milvus {
 
   // Initialize the Milvus client
   public async init() {
+    // URI is required to connect to Milvus, TOKEN is optional
     if (!process.env.URI) {
       throw new Error("URI is required, please check your .env file.");
     }
 
     try {
+      // Create a new Milvus client
       this._client = new MilvusClient({
         address: process.env.URI || "",
         token: process.env.TOKEN,
@@ -62,7 +63,8 @@ class Milvus {
           "grpc.keepalive_timeout_ms": 5000, // Adjust the time to wait for a response to a ping
         },
       });
-      return await this.createCollection(); // Create a new collection
+      // Create a new collection
+      return await this.createCollection();
     } catch (error) {
       throw error;
     }
@@ -71,10 +73,12 @@ class Milvus {
   // Create a new collection
   public async createCollection() {
     try {
-      const res = await this.hasCollection(); // Check if the collection exists
+      // Check if the collection exists
+      const res = await this.hasCollection();
       if (res?.value) {
         return res;
       }
+      // Create a new collection
       const collectionRes = await this._client?.createCollection({
         collection_name: COLLECTION_NAME,
         dimension: DIM,
@@ -116,25 +120,33 @@ class Milvus {
     }
   }
 
+  // Insert data in batches, for example, 1000 data, insert 100 each time
   public async batchInsert(
     texts: { [key in CSV_KEYS]: string }[],
     startIndex: number
   ): Promise<MutationResult | undefined> {
     try {
+      // Total number of texts to be inserted
       const total = texts.length;
+      // Calculate the end index for the current batch
       const endIndex = startIndex + this._MAX_INSERT_COUNT;
+      // Slice the texts array to get the current batch
       const insertTexts = texts.slice(startIndex, endIndex);
+      // Set the inserting flag to true
       this._is_inserting = true;
 
+      // If it's the first batch, reset the progress
       if (startIndex === 0) {
         this._insert_progress = 0;
       }
+      // Array to hold the data to be inserted
       const insertDatas = [];
       for (let i = 0; i < insertTexts.length; i++) {
         const row = insertTexts[i] as any;
-        // embed question to vector by module all-MiniLM-L6-v2
+        // Embed the question into a vector using the all-MiniLM-L6-v2 module
         const data = await embedder.embed(row[CSV_KEYS.QUESTION]);
 
+        // Prepare the data to be inserted into the Milvus collection
         insertDatas.push({
           vector: data.values,
           /**
@@ -145,20 +157,26 @@ class Milvus {
           answer: row[CSV_KEYS.ANSWER],
         });
       }
+
       console.log(
         `--- ${startIndex} ~ ${endIndex} embedding done, begin to insert into milvus --- `
       );
+      // Insert the data into Milvus
       const res = await milvus.insert({
         fields_data: insertDatas,
         collection_name: COLLECTION_NAME,
       });
+      // Update the progress
       this._insert_progress = Math.floor((endIndex / total) * 100);
+
       console.log(
         `--- ${startIndex} ~ ${endIndex} insert done, ${this._insert_progress}% now ---`
       );
+      // If not all data has been inserted, continue inserting
       if (endIndex < total) {
         return await this.batchInsert(texts, endIndex + 1);
       }
+      // If all data has been inserted, update the progress and inserting flag
       this._insert_progress = 100;
       this._is_inserting = false;
       return res;
@@ -169,14 +187,17 @@ class Milvus {
     }
   }
 
+  // Get the progress of the insert operation
   get insertProgress() {
     return this._insert_progress;
   }
 
+  // Check if data is being inserted
   get isInserting() {
     return this._is_inserting;
   }
 
+  // Get the error message
   get errorMsg() {
     return this._error_msg;
   }

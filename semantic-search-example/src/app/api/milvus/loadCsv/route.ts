@@ -1,6 +1,3 @@
-// Create a custom request handler for the /classify route.
-// For more information, see https://nextjs.org/docs/app/building-your-application/routing/router-handlers
-
 import { NextResponse, NextRequest } from "next/server";
 import path from "path";
 import fs from "fs/promises";
@@ -8,9 +5,12 @@ import Papaparse from "papaparse";
 import { milvus } from "../../../utils/milvus";
 export const dynamic = "force-dynamic";
 
-/* 
-  Note: API requests may timeout on Vercel's free plan as it has a maximum timeout limit of 10 seconds 
-*/
+/**
+ * Handles the GET request for loading CSV data into Milvus.
+ * Note: API requests may timeout on Vercel's free plan as it has a maximum timeout limit of 10 seconds
+ * @param req - The NextRequest object representing the incoming request.
+ * @returns A NextResponse object containing the response data.
+ */
 export async function GET(req: NextRequest) {
   const searchParams = req.nextUrl.searchParams;
   // Client get only csv data, for random question
