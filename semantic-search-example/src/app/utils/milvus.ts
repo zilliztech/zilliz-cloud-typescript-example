@@ -9,13 +9,12 @@ import { embedder } from "./embedder";
 
 // Define constants for the Milvus client
 const DIM = 384; // model Xenova/all-MiniLM-L6-v2 embedding dimension
-export const COLLECTION_NAME = "transformerjs_with_milvus"; // example collection name
+export const COLLECTION_NAME = "semantic_search_example"; // example collection name
 export const VECTOR_FIELD_NAME = "vector"; // verctor field name
 export const METRIC_TYPE = "COSINE";
 export const INDEX_TYPE = "AUTOINDEX";
 
 export enum CSV_KEYS {
-  ID = "id",
   QUESTION = "question",
   ANSWER = "answer",
   CSV_ID = "csvId",
@@ -142,7 +141,6 @@ class Milvus {
            * The question and answer are stored as dynamic JSON.
            * They won't appear in the schema, but can be retrieved during a similarity search.
            * */
-          csvId: row[CSV_KEYS.ID],
           question: row[CSV_KEYS.QUESTION],
           answer: row[CSV_KEYS.ANSWER],
         });

@@ -10,7 +10,6 @@ export const dynamic = "force-dynamic";
 
 /* 
   Note: API requests may timeout on Vercel's free plan as it has a maximum timeout limit of 10 seconds 
-  And 500 question need 3 mins.
 */
 export async function GET(req: NextRequest) {
   const searchParams = req.nextUrl.searchParams;

@@ -26,7 +26,7 @@ interface csvDataType {
   question: string;
   answer: string;
 }
-const HEADERS = ["id", "score", "question", "answer", "csvId"];
+const HEADERS = ["id", "score", "question", "answer"];
 let timer: NodeJS.Timeout | null = null;
 export default function SearchPage() {
   // Define state variables
