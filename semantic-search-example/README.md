@@ -23,7 +23,7 @@ yarn
 
 ## Configuration
 
-In order to run this example, you have to supply the Milvus/[Zilliz cloud token](https://docs.zilliz.com/docs/manage-api-keys) needed to interact with the Milvus.
+To successfully run this example, you must provide the [Milvus](https://milvus.io/docs/quickstart.md)/[Zilliz Cloud](https://docs.zilliz.com/docs/quick-start) URI to establish a connection with Milvus. Additionally, if authentication is enabled, you will also need to supply a valid token.
 
 ```
 URI=YOUR_MILVUS_URI
@@ -47,7 +47,7 @@ npm run start
 
 ### Utilities
 
-- `embedder`: This class leverages a pipeline from the @xenova/transformers library to generate embeddings from the input text. It employs the Xenova/all-MiniLM-L6-v2 model for this transformation. And it offers a method to generate embeddings from a single string.
+- `embedder`: This class leverages a pipeline from the [@xenova/transformers](https://www.npmjs.com/package/@xenova/transformers) library to generate embeddings from the input text. It employs the [Xenova/all-MiniLM-L6-v2](https://huggingface.co/Xenova/all-MiniLM-L6-v2) model for this transformation. And it offers a method to generate embeddings from a single string.
 
 ```javascript
 import { AllTasks, pipeline } from "@xenova/transformers";
@@ -89,7 +89,7 @@ export { embedder };
 
 ```
 
-- `milvus.ts`: This class leverages the @zilliz/milvus2-sdk-node to interact with Milvus. It provides functions for data search, insertion, and collection creation. The batchInsert function allows for batch uploads and offers progress tracking capabilities.
+- `milvus.ts`: This class leverages the [@zilliz/milvus2-sdk-node](https://github.com/milvus-io/milvus-sdk-node) to interact with Milvus. It provides functions for data search, insertion, and collection creation. The batchInsert function allows for batch uploads and offers progress tracking capabilities.
 
 ```javascript
 import {
@@ -305,7 +305,7 @@ export { milvus };
 
 - `/api/milvus/insert`: This endpoint embeds a single text and inserts it into the collection.
 
-- `/api/milvus/loadCsv`: This endpoint processes the local file `/public/test.csv`, originally sourced from Kaggle. It transforms the 'question' field into a vector and asynchronously imports the data into the Milvus collection in batches. The progress of the import operation can be monitored via the `/api/milvus/loadCsv/progress` endpoint.
+- `/api/milvus/loadCsv`: This endpoint processes the local file `/public/test.csv`, originally sourced from [Kaggle](https://www.kaggle.com/datasets/veeralakrishna/questionanswer-combination). It transforms the 'question' field into a vector and asynchronously imports the data into the Milvus collection in batches. The progress of the import operation can be monitored via the `/api/milvus/loadCsv/progress` endpoint.
 
 - `/api/milvus/search`: This endpoint takes text from the body of the request, embeds it, and performs a search within the Milvus collection.
 

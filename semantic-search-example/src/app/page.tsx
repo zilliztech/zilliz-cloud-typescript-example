@@ -1,6 +1,5 @@
 import SearchPage from "./search";
 import { embedder } from "./utils/embedder";
-
 const embedText = async (text: string) => {
   return await embedder.embed(text);
 };
@@ -13,3 +12,10 @@ export default async function Home() {
     </div>
   );
 }
+
+export const metadata = {
+  title: "Semantic Search - Zilliz",
+  icons: {
+    icon: "/icon.svg",
+  },
+};

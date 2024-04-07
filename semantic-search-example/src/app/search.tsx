@@ -191,35 +191,37 @@ export default function SearchPage() {
   };
 
   return (
-    <main className="container mx-auto mt-40">
-      {/* Note: API requests may timeout on Vercel's free plan as it has a maximum timeout limit of 10 seconds*/}
-      {SUPPORT_IMPORT && (
-        <Button
-          onClick={() => {
-            loadCsv();
-          }}
-          isLoading={loading.insertCsv}
-          isDisabled={loading.page}
-          className="fixed top-2 right-32"
-          variant="faded"
-        >
-          {!loading.insertCsv
-            ? `Load 1000 QAs`
-            : `Embedding and inserting ...(${insertProgress}%)`}
-        </Button>
-      )}
+    <main className="container mx-auto">
+      <div className="flex justify-between mt-4">
+        <a target="_blank" href="https://zilliz.com">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/logo.svg" alt="logo" />
+        </a>
+        <div className="flex gap-2">
+          {/* Note: API requests may timeout on Vercel's free plan as it has a maximum timeout limit of 10 seconds*/}
+          {SUPPORT_IMPORT && (
+            <Button
+              onClick={() => {
+                loadCsv();
+              }}
+              isLoading={loading.insertCsv}
+              isDisabled={loading.page}
+              variant="faded"
+            >
+              {!loading.insertCsv
+                ? `Load 1000 QAs`
+                : `Embedding and inserting ...(${insertProgress}%)`}
+            </Button>
+          )}
 
-      {/* Button to open the insert data modal */}
-      <Button
-        onPress={onOpen}
-        className="fixed top-2 right-2"
-        variant="faded"
-        isDisabled={loading.page}
-      >
-        Insert data
-      </Button>
+          {/* Button to open the insert data modal */}
+          <Button onPress={onOpen} variant="faded" isDisabled={loading.page}>
+            Insert data
+          </Button>
+        </div>
+      </div>
 
-      <div className="flex flex-col gap-6">
+      <div className="flex flex-col gap-6 mt-40">
         {/* Input field for the user to enter text to search */}
         <Input
           value={value}
