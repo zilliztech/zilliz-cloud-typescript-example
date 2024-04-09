@@ -30,7 +30,7 @@ URI=YOUR_MILVUS_URI
 TOKEN=USERNAME:PASSWORD or zilliz cloud api key
 ```
 
-If you are running the example locally, set the above environment variables in the `.env.local` file (for `yarn dev`)
+If you are running the example locally, set the above environment variables in either the `.env.development` file (for `yarn dev`) or the `.env.production` file (for `yarn build`).
 
 If using publish on Vercel , you need to set the corresponding environment variables in Vercel's settings.
 
