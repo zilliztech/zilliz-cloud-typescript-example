@@ -40,7 +40,7 @@ class Embedder {
     // const { text_embeds } = await this.textModel!(text_inputs);
     // const query_embedding = text_embeds.tolist()[0];
     // return query_embedding;
-    return text;
+    return [0];
   }
 }
 
