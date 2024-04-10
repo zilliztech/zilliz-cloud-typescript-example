@@ -27,20 +27,23 @@ class Embedder {
   }
 
   async embed(text: string) {
-    if (!this.tokenizer || !this.textModel) {
-      await this.init();
-    }
-    // Run tokenization
-    let text_inputs = this.tokenizer!(text, {
-      padding: true,
-      truncation: true,
-    });
+    try {
+      if (!this.tokenizer || !this.textModel) {
+        await this.init();
+      }
+      // Run tokenization
+      let text_inputs = this.tokenizer!(text, {
+        padding: true,
+        truncation: true,
+      });
 
-    // Compute embeddings
-    const { text_embeds } = await this.textModel!(text_inputs);
-    console.log("---- text embeds 1 -----", text_embeds);
-    const query_embedding = text_embeds.tolist()[0];
-    return query_embedding;
+      // Compute embeddings
+      const { text_embeds } = await this.textModel!(text_inputs);
+      const query_embedding = text_embeds.tolist()[0];
+      return query_embedding;
+    } catch (error) {
+      throw new Error("Error in embedding text: " + error);
+    }
   }
 }
 

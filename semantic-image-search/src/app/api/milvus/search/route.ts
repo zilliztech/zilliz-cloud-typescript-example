@@ -13,7 +13,6 @@ export async function POST(req: NextRequest) {
     const { text } = await req.json();
     // embed
     const data = await embedder.embed(text);
-    console.log("---- embed text ---", data.length);
     const result = await milvus.search({
       vector: data as number[],
       collection_name: COLLECTION_NAME,
