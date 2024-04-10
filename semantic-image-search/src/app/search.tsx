@@ -24,7 +24,7 @@ export default function SearchPage() {
         ...v,
         search: true,
       }));
-      const res = await axios.post(`/api/milvus/search`, { text });
+      const res = await axios.get(`/api/milvus/search?text=${text}`);
       setData(res.data?.results || []);
     } finally {
       setLoading((v) => ({

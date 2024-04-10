@@ -8,9 +8,10 @@ export const dynamic = "force-dynamic";
  * @param req - The NextRequest object containing the request data.
  * @returns A NextResponse object with the search result in JSON format.
  */
-export async function POST(req: NextRequest) {
+export async function GET(req: NextRequest) {
   try {
-    const { text } = await req.json();
+    const searchParams = req.nextUrl.searchParams;
+    const text = searchParams.get("text") || "";
     // embed
     const data = await embedder.embed(text);
     const result = await milvus.search({
