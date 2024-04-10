@@ -38,6 +38,7 @@ class Embedder {
 
     // Compute embeddings
     const { text_embeds } = await this.textModel!(text_inputs);
+    console.log("---- text embeds 1 -----", text_embeds);
     const query_embedding = text_embeds.tolist()[0];
     return query_embedding;
   }
