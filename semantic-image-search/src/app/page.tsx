@@ -6,7 +6,8 @@ const embedText = async (text: string) => {
 };
 export default async function Home() {
   // This is server component, so we can pulling model when build
-  await embedText("hello world");
+  const res = await embedText("hello world");
+  console.log(res);
   return (
     <div>
       <SearchPage />
