@@ -1,6 +1,5 @@
 import SearchPage from "./search";
 import { embedder } from "./utils/embedder";
-export const dynamic = "force-dynamic";
 
 const embedText = async (text: string) => {
   return await embedder.embed(text);
