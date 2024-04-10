@@ -25,7 +25,7 @@ export async function GET(req: NextRequest) {
         "photoDescription",
         "ratio",
       ],
-      limit: 60,
+      limit: 2,
     });
 
     return NextResponse.json(result || {});
