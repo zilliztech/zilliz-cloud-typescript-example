@@ -14,23 +14,32 @@ export async function GET(req: NextRequest) {
     const text = searchParams.get("text") || "";
     // embed
     const data = await embedder.embed(text);
-    const result = await milvus.search({
-      vector: data as number[],
-      collection_name: COLLECTION_NAME,
-      output_fields: [
-        "url",
-        "id",
-        "blurHash",
-        "aiDescription",
-        "photoDescription",
-        "ratio",
-      ],
-      limit: 2,
-    });
 
-    return NextResponse.json(result || {});
+    // const result = await milvus.search({
+    //   vector: data as number[],
+    //   collection_name: COLLECTION_NAME,
+    //   output_fields: [
+    //     "url",
+    //     "id",
+    //     "blurHash",
+    //     "aiDescription",
+    //     "photoDescription",
+    //     "ratio",
+    //   ],
+    //   limit: 60,
+    // });
+    console.log("---success", process.memoryUsage(), process.cpuUsage());
+
+    // return NextResponse.json(result || {});
+    return NextResponse.json(data);
   } catch (error) {
-    console.log("---error", error);
-    return NextResponse.json(error || {});
+    console.log("---error", process.memoryUsage(), process.cpuUsage());
+    return NextResponse.json(
+      {
+        error,
+        memory: process.memoryUsage(),
+        storage: process.cpuUsage(),
+      } || {}
+    );
   }
 }
