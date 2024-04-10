@@ -1,10 +1,10 @@
-# Semantic Search
+# Semantic Image Search
 
-In this example we will see how to use Milvus or Zilliz Cloud for semantic search.
+In this example we will see how to use Milvus or Zilliz Cloud for semantic image search.
 
 ## Deploy to Vercel
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/nameczz/milvus-node-demos/tree/master/semantic-search-example&repository-name=semantic-search-example&env=URI,TOKEN)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/nameczz/milvus-node-demos/tree/master/semantic-image-search&repository-name=semantic-image-search&env=URI,TOKEN)
 
 ## Setup
 

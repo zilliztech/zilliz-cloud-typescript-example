@@ -61,11 +61,11 @@ export default function SearchPage() {
       <Input
         value={value}
         placeholder="Enter your text to search"
-        className="full-width"
+        className="full-width mb-4"
         onChange={(e) => setValue(e.target.value)}
         endContent={
           <Button
-            variant="light"
+            variant="solid"
             color="primary"
             size="lg"
             onClick={() => handleSearch(value)}
