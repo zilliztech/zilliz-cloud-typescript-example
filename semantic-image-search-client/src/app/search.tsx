@@ -1,5 +1,5 @@
 "use client";
-import { Button, Input } from "@nextui-org/react";
+import { Button, CircularProgress, Input, Modal } from "@nextui-org/react";
 import axios from "axios";
 import { useCallback, useEffect, useRef, useState } from "react";
 import React from "react";
@@ -13,8 +13,7 @@ export default function SearchPage() {
   const [searchVectors, setSearchVectors] = useState<number[]>([]);
   const [loading, setLoading] = useState({
     search: false,
-    insertCsv: false,
-    insert: false,
+    imageSearch: false,
     page: true,
   });
 
@@ -63,6 +62,7 @@ export default function SearchPage() {
       setLoading((v) => ({
         ...v,
         search: true,
+        imageSearch: text.includes("https"),
       }));
       worker.current.postMessage({ text });
     }
@@ -80,6 +80,7 @@ export default function SearchPage() {
         setLoading((v) => ({
           ...v,
           search: false,
+          imageSearch: false,
         }));
       }
     };
@@ -112,7 +113,7 @@ export default function SearchPage() {
     <main className="mx-auto max-w-[1960px] p-4 relative">
       <Input
         value={value}
-        placeholder="Enter your text to search"
+        placeholder="Enter text like: dog, cat, flower ... "
         className="full-width mb-4"
         onChange={(e) => setValue(e.target.value)}
         size="lg"
@@ -128,7 +129,21 @@ export default function SearchPage() {
           </Button>
         }
       />
-      <ImageGrid images={data} />
+      {ready === false && (
+        <div className="z-10 fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex items-center justify-center">
+          <div className="text-white text-2xl font-bold">
+            Loading model and database...
+          </div>
+        </div>
+      )}
+      {loading.imageSearch && (
+        <div className="fixed inset-0 gap-4 flex items-center justify-center z-50">
+          <div className="bg-black opacity-50 absolute inset-0"></div>
+          <CircularProgress size="lg" className="z-50" />
+          <p className=" text-2xl font-bold">Searching with image ...</p>
+        </div>
+      )}
+      <ImageGrid images={data} setImgUrl={handleSearch} />
     </main>
   );
 }
