@@ -1,6 +1,6 @@
 {
   "functions": {
-    "api/milvus/route.ts": {
+    "api/milvus/route.js": {
       "includeFiles": "node_modules/@zilliz/milvus2-sdk-node/dist/proto/**/*"
     }
   }
