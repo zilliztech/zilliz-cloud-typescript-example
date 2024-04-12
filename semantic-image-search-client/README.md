@@ -11,7 +11,7 @@ In this example we will see how to use Milvus or Zilliz Cloud for semantic image
 Prerequisites:
 
 - `Nodejs` >= 18.0.0
-- `Next` >= 14.1.0
+- `Next.js` >= 14.2.0 (Version 14.1.0 will encounter errors with the @xenova/transformers package)
 
 Clone the repository and install the dependencies.
 
