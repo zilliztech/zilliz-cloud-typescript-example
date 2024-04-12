@@ -1,6 +1,9 @@
 {
   "functions": {
-    "api/**/*": {
+    "api/milvus/search": {
+      "includeFiles": "node_modules/@zilliz/milvus2-sdk-node/dist/proto/**/*"
+    },
+    "api/milvus": {
       "includeFiles": "node_modules/@zilliz/milvus2-sdk-node/dist/proto/**/*"
     }
   }
