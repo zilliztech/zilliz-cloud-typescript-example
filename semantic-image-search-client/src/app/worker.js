@@ -68,7 +68,6 @@ self.addEventListener("message", async (event) => {
   const { text } = event.data;
 
   if (text.includes("https://")) {
-    console.log(text);
     const image = await RawImage.read(text);
     const image_inputs = await process(image);
     const { image_embeds } = await vision_model(image_inputs);

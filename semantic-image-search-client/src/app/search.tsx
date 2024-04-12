@@ -11,6 +11,7 @@ export default function SearchPage() {
   const [value, setValue] = useState("");
   const [data, setData] = useState<ImageType[]>([]);
   const [searchVectors, setSearchVectors] = useState<number[]>([]);
+  const [progress, setProgress] = useState(0);
   const [loading, setLoading] = useState({
     search: false,
     imageSearch: false,
@@ -30,11 +31,13 @@ export default function SearchPage() {
     }
 
     const onMessageReceived = (e: any) => {
-      console.log(e);
-
       switch (e.data.status) {
         case "initiate":
           setReady(false);
+          break;
+        case "progress":
+          const progress = Math.floor(e.data.progress);
+          setProgress(progress);
           break;
         case "ready":
           setReady(true);
@@ -132,7 +135,7 @@ export default function SearchPage() {
       {ready === false && (
         <div className="z-10 fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex items-center justify-center">
           <div className="text-white text-2xl font-bold">
-            Loading model and database...
+            {`Loading models ${progress}%...`}
           </div>
         </div>
       )}
