@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 
 const nextConfig = {
-  // reactStrictMode: false,
+  reactStrictMode: false,
 
   // Indicate that these packages should not be bundled by webpack
   experimental: {
