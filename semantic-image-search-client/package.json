@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@grpc/proto-loader": "^0.7.12",
     "@nextui-org/react": "^2.2.10",
     "@xenova/transformers": "^2.6.1",
     "@zilliz/milvus2-sdk-node": "^2.3.5",
