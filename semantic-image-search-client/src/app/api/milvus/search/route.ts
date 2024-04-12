@@ -27,7 +27,6 @@ export async function POST(req: NextRequest) {
 
     return NextResponse.json(result || {});
   } catch (error) {
-    console.log("---error", process.memoryUsage(), process.cpuUsage());
     return NextResponse.json(
       {
         error,
