@@ -84,20 +84,20 @@ for (const [index, imageData] of data.entries()) {
   const imageVector = image_embeds.tolist()[0];
   console.log(`----- Embedding image ${index} success -----`);
 
-  await milvusClient.insert({
-    collection_name: COLLECTION_NAME,
-    fields_data: [
-      {
-        vector: imageVector,
-        imageId: imageData.imageId,
-        url: imageData.url,
-        ratio: imageData.photoAspectRatio,
-        aiDescription: imageData.aiDescription,
-        photoDescription: imageData.photoDescription,
-        blurHash: imageData.blurHash,
-      },
-    ],
-  });
+  // await milvusClient.insert({
+  //   collection_name: COLLECTION_NAME,
+  //   fields_data: [
+  //     {
+  //       vector: imageVector,
+  //       imageId: imageData.imageId,
+  //       url: imageData.url,
+  //       ratio: imageData.photoAspectRatio,
+  //       aiDescription: imageData.aiDescription,
+  //       photoDescription: imageData.photoDescription,
+  //       blurHash: imageData.blurHash,
+  //     },
+  //   ],
+  // });
   console.log(`----- Insert image ${index} insert success -----`);
 }
 

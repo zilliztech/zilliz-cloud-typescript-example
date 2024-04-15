@@ -1,5 +1,5 @@
 "use client";
-import { Button, Input } from "@nextui-org/react";
+import { Button, CircularProgress, Input } from "@nextui-org/react";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import React from "react";
@@ -14,6 +14,7 @@ export default function SearchPage() {
     insertCsv: false,
     insert: false,
     page: true,
+    imageSearch: false,
   });
 
   // Function to perform search
@@ -23,6 +24,7 @@ export default function SearchPage() {
       setLoading((v) => ({
         ...v,
         search: true,
+        imageSearch: text.includes("https"),
       }));
       const res = await axios.get(`/api/milvus/search?text=${text}`);
       setData(res.data?.results || []);
@@ -30,6 +32,7 @@ export default function SearchPage() {
       setLoading((v) => ({
         ...v,
         search: false,
+        imageSearch: false,
       }));
     }
   };
@@ -76,7 +79,14 @@ export default function SearchPage() {
           </Button>
         }
       />
-      <ImageGrid images={data} />
+      {loading.imageSearch && (
+        <div className="fixed inset-0 gap-4 flex items-center justify-center z-50">
+          <div className="bg-black opacity-50 absolute inset-0"></div>
+          <CircularProgress size="lg" className="z-50" />
+          <p className=" text-2xl font-bold">Searching with image ...</p>
+        </div>
+      )}
+      <ImageGrid images={data} setImgUrl={handleSearch} />
     </main>
   );
 }
