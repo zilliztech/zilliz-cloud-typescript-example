@@ -1,23 +1,24 @@
 # Semantic Image Search
 
-In this example we will see how to use Milvus or Zilliz Cloud for semantic image search.
+In this example we will see how to use Milvus or Zilliz Cloud for semantic image search, and embedding data in browser.
 
 ## Deploy to Vercel
 
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/nameczz/milvus-node-demos/tree/master/semantic-image-search-client&repository-name=semantic-image-search-client&env=URI,TOKEN)
+
 
 ## Setup
 
 Prerequisites:
 
 - `Nodejs` >= 18.0.0
-- `Next.js` >= 14.2.0 (Version 14.1.0 will encounter errors with the @xenova/transformers package)
+- `Next` >= 14.1.0
 
 Clone the repository and install the dependencies.
 
 ```
-git clone git@github.com:zilliztech/semantic-search-example.
-cd semantic-search-example
+git clone git@github.com:zilliztech/semantic-image-search-client
+cd semantic-image-search-client
 yarn
 ```
 
@@ -30,7 +31,7 @@ URI=YOUR_MILVUS_URI
 TOKEN=USERNAME:PASSWORD or zilliz cloud api key
 ```
 
-If you are running the example locally, set the above environment variables in either the `.env.development` file (for `yarn dev`) or the `.env.production` file (for `yarn build`).
+If you are running the example locally, set the above environment variables in the `.env.local` file (for `yarn dev`)
 
 If using publish on Vercel , you need to set the corresponding environment variables in Vercel's settings.
 
@@ -45,49 +46,15 @@ npm run start
 
 ## Application structure
 
-### Utilities
+### Data Init
+To initialize the data, you can use the `loadImages.mjs` script. This script reads the `photo.tsv` which is download from Hugging Face, embeds all the images, and inserts them into the Milvus Collection. Please note that this process may take some time, especially if you have a large number of images.
 
-- `embedder`: This class leverages a pipeline from the [@xenova/transformers](https://www.npmjs.com/package/@xenova/transformers) library to generate embeddings from the input text. It employs the [Xenova/all-MiniLM-L6-v2](https://huggingface.co/Xenova/all-MiniLM-L6-v2) model for this transformation. And it offers a method to generate embeddings from a single string.
-
-```javascript
-import { AllTasks, pipeline } from "@xenova/transformers";
-
-// Embedder class for feature extraction
-class Embedder {
-  // Declare a pipeline for feature extraction
-  private pipe: AllTasks["feature-extraction"] | null = null;
-
-  // Initialize the pipeline
-  async init() {
-    // The pipeline is initialized with the "feature-extraction" task and the "Xenova/all-MiniLM-L6-v2" model
-    this.pipe = await pipeline("feature-extraction", "Xenova/all-MiniLM-L6-v2");
-  }
-
-  // Method to embed a single string
-  async embed(text: string) {
-    // If the pipeline is not initialized, initialize it
-    if (!this.pipe) {
-      await this.init();
-    }
-    // Use the pipeline to extract features from the text
-    const result =
-      this.pipe &&
-      (await this.pipe(text, { pooling: "mean", normalize: true }));
-    // Return an object with the original text and the extracted features
-    return {
-      text,
-      values: Array.from(result?.data || []),
-    };
-  }
-}
-
-// Create a singleton instance of the Embedder class
-const embedder = new Embedder();
-
-// Export the embedder instance
-export { embedder };
-
+To run the script, execute the following command:
 ```
+node loadImages.mjs
+```
+
+### Utilities
 
 - `milvus.ts`: This class leverages the [@zilliz/milvus2-sdk-node](https://github.com/milvus-io/milvus-sdk-node) to interact with Milvus. It provides functions for data search, insertion, and collection creation. The batchInsert function allows for batch uploads and offers progress tracking capabilities.
 
@@ -95,31 +62,18 @@ export { embedder };
 import {
   InsertReq,
   MilvusClient,
-  MutationResult,
-  QueryReq,
   SearchSimpleReq,
 } from "@zilliz/milvus2-sdk-node";
-import { embedder } from "./embedder";
 
 // Define constants for the Milvus client
-const DIM = 384; // model Xenova/all-MiniLM-L6-v2 embedding dimension
-export const COLLECTION_NAME = "semantic_search_example"; // example collection name
+const DIM = 512; // model Xenova/clip-vit-base-patch16 embedding dimension
+export const COLLECTION_NAME = "semantic_image_search"; // example collection name
 export const VECTOR_FIELD_NAME = "vector"; // verctor field name
 export const METRIC_TYPE = "COSINE";
 export const INDEX_TYPE = "AUTOINDEX";
 
-export enum CSV_KEYS {
-  QUESTION = "question",
-  ANSWER = "answer",
-  CSV_ID = "csvId",
-}
-
 class Milvus {
   private _client: MilvusClient | undefined;
-  private _MAX_INSERT_COUNT = 100;
-  private _insert_progress = 0;
-  private _is_inserting = false;
-  private _error_msg = "";
 
   constructor() {
     if (!this._client) {
@@ -186,17 +140,6 @@ class Milvus {
     }
   }
 
-  // List all collections
-  public async listCollections() {
-    const res = await this._client?.listCollections();
-    return res;
-  }
-
-  // Query data from a collection
-  public async query(data: QueryReq) {
-    return await this._client?.query(data);
-  }
-
   // Search for data in a collection
   public async search(data: SearchSimpleReq) {
     return await this._client?.search({
@@ -213,83 +156,6 @@ class Milvus {
       throw error;
     }
   }
-
-  // Insert data in batches, for example, 1000 data, insert 100 each time
-  public async batchInsert(
-    texts: { [key in CSV_KEYS]: string }[],
-    startIndex: number
-  ): Promise<MutationResult | undefined> {
-    try {
-      // Total number of texts to be inserted
-      const total = texts.length;
-      // Calculate the end index for the current batch
-      const endIndex = startIndex + this._MAX_INSERT_COUNT;
-      // Slice the texts array to get the current batch
-      const insertTexts = texts.slice(startIndex, endIndex);
-      // Set the inserting flag to true
-      this._is_inserting = true;
-
-      // If it's the first batch, reset the progress
-      if (startIndex === 0) {
-        this._insert_progress = 0;
-      }
-      // Array to hold the data to be inserted
-      const insertDatas = [];
-      for (let i = 0; i < insertTexts.length; i++) {
-        const row = insertTexts[i] as any;
-        // Embed the question into a vector using the all-MiniLM-L6-v2 module
-        const data = await embedder.embed(row[CSV_KEYS.QUESTION]);
-
-        // Prepare the data to be inserted into the Milvus collection
-        insertDatas.push({
-          vector: data.values,
-          /**
-           * The question and answer are stored as dynamic JSON.
-           * They won't appear in the schema, but can be retrieved during a similarity search.
-           * */
-          question: row[CSV_KEYS.QUESTION],
-          answer: row[CSV_KEYS.ANSWER],
-        });
-      }
-
-
-      // Insert the data into Milvus
-      const res = await milvus.insert({
-        fields_data: insertDatas,
-        collection_name: COLLECTION_NAME,
-      });
-      // Update the progress
-      this._insert_progress = Math.floor((endIndex / total) * 100);
-
-      // If not all data has been inserted, continue inserting
-      if (endIndex < total) {
-        return await this.batchInsert(texts, endIndex + 1);
-      }
-      // If all data has been inserted, update the progress and inserting flag
-      this._insert_progress = 100;
-      this._is_inserting = false;
-      return res;
-    } catch (error) {
-      this._insert_progress = 0;
-      this._is_inserting = false;
-      this._error_msg = (error as any).message || "Insert failed";
-    }
-  }
-
-  // Get the progress of the insert operation
-  get insertProgress() {
-    return this._insert_progress;
-  }
-
-  // Check if data is being inserted
-  get isInserting() {
-    return this._is_inserting;
-  }
-
-  // Get the error message
-  get errorMsg() {
-    return this._error_msg;
-  }
 }
 
 // Create a singleton instance of the Milvus class
@@ -301,21 +167,20 @@ export { milvus };
 
 ### APIs
 
-- `/api/milvus`: This endpoint establishes a connection to Milvus, creates a collection named `semantic_search_example`, sets up an AUTO_INDEX index, and loads the collection into memory.
-
-- `/api/milvus/insert`: This endpoint embeds a single text and inserts it into the collection.
-
-- `/api/milvus/loadCsv`: This endpoint processes the local file `/public/test.csv`, originally sourced from [Kaggle](https://www.kaggle.com/datasets/veeralakrishna/questionanswer-combination). It transforms the 'question' field into a vector and asynchronously imports the data into the Milvus collection in batches. The progress of the import operation can be monitored via the `/api/milvus/loadCsv/progress` endpoint.
+- `/api/milvus`: This endpoint establishes a connection to Milvus, creates a collection named `semantic_search_example` with AUTO_INDEX index, COSINE metric type, and loads the collection into memory.
 
 - `/api/milvus/search`: This endpoint takes text from the body of the request, embeds it, and performs a search within the Milvus collection.
 
-### Pages
+### Client
+
+- `worker.js`: This file runs the model in the browser. It requires downloading the model at the first time and supports embedding text and image using the Xenova/clip-vit-base-patch16 model.
+
+- `ImageGrid.tsx`: Renders a grid of images. 
 
 - `layout.tsx`: This file uses NextUIProvider as the provider, enabling the use of next-ui.
 
-- `page.tsx`: This file must be a server component. It embeds the `hello world` string during the build process, which allows for the download of the `Xenova/all-MiniLM-L6-v2` model.
+- `search.tsx`: This file provides a straightforward semantic search UI, enabling users to perform semantic image searches.
 
-- `search.tsx`: This file provides a straightforward semantic search UI, enabling users to perform semantic searches and insert their own data.
 
 ### Next config
 
@@ -326,14 +191,20 @@ Since Milvus operates as a gRPC server, it's necessary to include `@zilliz/milvu
 
 const nextConfig = {
   reactStrictMode: false,
+  webpack: (config) => {
+    // Ignore node-specific modules when bundling for the browser
+    // See https://webpack.js.org/configuration/resolve/#resolvealias
+    config.resolve.alias = {
+      ...config.resolve.alias,
+      sharp$: false,
+      "onnxruntime-node$": false,
+    };
 
+    return config;
+  },
   // Indicate that these packages should not be bundled by webpack
   experimental: {
-    serverComponentsExternalPackages: [
-      "sharp",
-      "onnxruntime-node",
-      "@zilliz/milvus2-sdk-node",
-    ],
+    serverComponentsExternalPackages: ["@zilliz/milvus2-sdk-node"],
     outputFileTracingIncludes: {
       // When deploying to Vercel, the following configuration is required
       "/api/**/*": ["node_modules/@zilliz/milvus2-sdk-node/dist/proto/**/*"],
@@ -342,4 +213,5 @@ const nextConfig = {
 };
 
 module.exports = nextConfig;
+
 ```

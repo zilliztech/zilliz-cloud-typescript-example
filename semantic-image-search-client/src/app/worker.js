@@ -11,6 +11,9 @@ console.log("---- worker init ----");
 // Skip local model check
 env.allowLocalModels = false;
 
+/**
+ * Represents a singleton class for the application.
+ */
 class ApplicationSingleton {
   static model_id = "Xenova/clip-vit-base-patch16";
   static BASE_URL =
@@ -21,6 +24,11 @@ class ApplicationSingleton {
   static text_model = null;
   static vision_model = null;
 
+  /**
+   * Returns an instance of the ApplicationSingleton class.
+   * @param {Function} progress_callback - The progress callback function.
+   * @returns {Promise<Array>} A promise that resolves to an array containing the tokenizer, text model, vision model, and processor.
+   */
   static async getInstance(progress_callback = null) {
     // Load tokenizer and text model
     if (this.tokenizer === null) {

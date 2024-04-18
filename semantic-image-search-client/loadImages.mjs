@@ -14,7 +14,7 @@ if (!process.env.URI) {
   throw new Error("Milvus URI is required");
 }
 
-const DIM = 512; // model Xenova/all-MiniLM-L6-v2 embedding dimension
+const DIM = 512; // model Xenova/clip-vit-base-patch16 embedding dimension
 export const COLLECTION_NAME = "semantic_image_search"; // example collection name
 export const VECTOR_FIELD_NAME = "vector"; // verctor field name
 export const METRIC_TYPE = "COSINE";

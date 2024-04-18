@@ -6,7 +6,7 @@ import {
 } from "@zilliz/milvus2-sdk-node";
 
 // Define constants for the Milvus client
-const DIM = 512; // model Xenova/all-MiniLM-L6-v2 embedding dimension
+const DIM = 512; // model Xenova/clip-vit-base-patch16 embedding dimension
 export const COLLECTION_NAME = "semantic_image_search"; // example collection name
 export const VECTOR_FIELD_NAME = "vector"; // verctor field name
 export const METRIC_TYPE = "COSINE";
