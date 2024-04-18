@@ -16,6 +16,14 @@ interface ImageGridProps {
   setImgUrl: (url: string) => void;
 }
 
+/**
+ * Renders a grid of images.
+ *
+ * @param props - The component props.
+ * @param props.images - An array of image objects.
+ * @param props.setImgUrl - A function to set the image URL.
+ * @returns The rendered ImageGrid component.
+ */
 export function ImageGrid(props: ImageGridProps) {
   const { images, setImgUrl } = props;
   return (

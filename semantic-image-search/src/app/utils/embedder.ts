@@ -9,6 +9,9 @@ import {
   RawImage,
 } from "@xenova/transformers";
 
+/**
+ * The Embedder class provides methods to embed text and images using the CLIP model.
+ */
 class Embedder {
   private modelId = "Xenova/clip-vit-base-patch16";
   private tokenizer: PreTrainedTokenizer | null = null;
@@ -16,6 +19,9 @@ class Embedder {
   private processor: Processor | null = null;
   private visionModel: PreTrainedModel | null = null;
 
+  /**
+   * Initializes the Embedder by loading the tokenizer and models.
+   */
   async init() {
     // Load tokenizer and text model
     if (!this.tokenizer) {
@@ -44,6 +50,12 @@ class Embedder {
     }
   }
 
+  /**
+   * Embeds the given text and returns the query embedding.
+   * @param text - The text to embed.
+   * @returns The query embedding as an array.
+   * @throws If there is an error in embedding the text.
+   */
   async embed(text: string) {
     try {
       if (!this.tokenizer || !this.textModel) {
@@ -65,6 +77,12 @@ class Embedder {
     }
   }
 
+  /**
+   * Embeds the image from the given URL and returns the image embedding.
+   * @param url - The URL of the image to embed.
+   * @returns The image embedding as an array.
+   * @throws If there is an error in embedding the image or no image URL is provided.
+   */
   async embedImage(url: string) {
     if (!url) {
       throw new Error("No image url provided");
@@ -73,7 +91,7 @@ class Embedder {
       if (!this.processor || !this.visionModel) {
         await this.init();
       }
-      // Run tokenization
+      // read image data
       const rawImage = await RawImage.read(url);
 
       let image_inputs = await this.processor!(rawImage);
@@ -83,7 +101,7 @@ class Embedder {
       const imageVector = image_embeds.tolist()[0] || [];
       return imageVector;
     } catch (error) {
-      throw new Error("Error in embedding text: " + error);
+      throw new Error("Error in embedding image: " + error);
     }
   }
 }

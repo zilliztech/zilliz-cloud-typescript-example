@@ -14,12 +14,23 @@ if (!process.env.URI) {
   throw new Error("Milvus URI is required");
 }
 
-const DIM = 512; // model Xenova/all-MiniLM-L6-v2 embedding dimension
+
+const DIM = 512; // model Xenova/clip-vit-base-patch16 embedding dimension
 export const COLLECTION_NAME = "semantic_image_search"; // example collection name
 export const VECTOR_FIELD_NAME = "vector"; // verctor field name
 export const METRIC_TYPE = "COSINE";
 export const INDEX_TYPE = "AUTOINDEX";
 
+/**
+ * Represents a client for interacting with the Milvus server.
+ *
+ * @typedef {Object} MilvusClient
+ * @property {string} address - The address of the Milvus server.
+ * @property {string} token - The authentication token for accessing the Milvus server.
+ * @property {Object} channelOptions - The options for configuring the gRPC channel.
+ * @property {number} channelOptions.grpc.keepalive_time_ms - The time interval between pings.
+ * @property {number} channelOptions.grpc.keepalive_timeout_ms - The time to wait for a response to a ping.
+ */
 const milvusClient = new MilvusClient({
   address: process.env.URI || "",
   token: process.env.TOKEN,
@@ -65,7 +76,7 @@ const vision_model = await CLIPVisionModelWithProjection.from_pretrained(
   }
 );
 
-// Load processor and vision model
+// Embedding images and insert to Milvus
 for (const [index, imageData] of data.entries()) {
   let image;
   try {
@@ -84,20 +95,20 @@ for (const [index, imageData] of data.entries()) {
   const imageVector = image_embeds.tolist()[0];
   console.log(`----- Embedding image ${index} success -----`);
 
-  // await milvusClient.insert({
-  //   collection_name: COLLECTION_NAME,
-  //   fields_data: [
-  //     {
-  //       vector: imageVector,
-  //       imageId: imageData.imageId,
-  //       url: imageData.url,
-  //       ratio: imageData.photoAspectRatio,
-  //       aiDescription: imageData.aiDescription,
-  //       photoDescription: imageData.photoDescription,
-  //       blurHash: imageData.blurHash,
-  //     },
-  //   ],
-  // });
+  await milvusClient.insert({
+    collection_name: COLLECTION_NAME,
+    fields_data: [
+      {
+        vector: imageVector,
+        imageId: imageData.imageId,
+        url: imageData.url,
+        ratio: imageData.photoAspectRatio,
+        aiDescription: imageData.aiDescription,
+        photoDescription: imageData.photoDescription,
+        blurHash: imageData.blurHash,
+      },
+    ],
+  });
   console.log(`----- Insert image ${index} insert success -----`);
 }
 

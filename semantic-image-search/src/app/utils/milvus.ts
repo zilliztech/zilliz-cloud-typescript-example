@@ -1,12 +1,11 @@
 import {
   InsertReq,
   MilvusClient,
-  QueryReq,
   SearchSimpleReq,
 } from "@zilliz/milvus2-sdk-node";
 
 // Define constants for the Milvus client
-const DIM = 512; // model Xenova/all-MiniLM-L6-v2 embedding dimension
+const DIM = 512; // model Xenova/clip-vit-base-patch16 embedding dimension
 export const COLLECTION_NAME = "semantic_image_search"; // example collection name
 export const VECTOR_FIELD_NAME = "vector"; // verctor field name
 export const METRIC_TYPE = "COSINE";
@@ -78,17 +77,6 @@ class Milvus {
     } catch (error) {
       throw error;
     }
-  }
-
-  // List all collections
-  public async listCollections() {
-    const res = await this._client?.listCollections();
-    return res;
-  }
-
-  // Query data from a collection
-  public async query(data: QueryReq) {
-    return await this._client?.query(data);
   }
 
   // Search for data in a collection

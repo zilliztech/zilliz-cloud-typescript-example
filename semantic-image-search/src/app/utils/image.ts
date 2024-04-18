@@ -2,6 +2,11 @@ import { decode } from "blurhash";
 
 const SIZE = 32;
 
+/**
+ * Converts a blur hash to a data URL representing the image.
+ * @param hash - The blur hash string.
+ * @returns The data URL representing the image.
+ */
 export function blurHashToDataURL(hash: string) {
   if (!hash) return undefined;
 
@@ -19,32 +24,3 @@ export function blurHashToDataURL(hash: string) {
   return canvas.toDataURL();
 }
 
-function downloadData(url: string, filename: string) {
-  // Create an anchor element with the data URL as the href attribute
-  const downloadLink = document.createElement("a");
-  downloadLink.href = url;
-
-  // Set the download attribute to specify the desired filename for the downloaded image
-  downloadLink.download = filename;
-
-  // Trigger the download
-  downloadLink.click();
-
-  // Clean up: remove the anchor element from the DOM
-  downloadLink.remove();
-}
-
-export function downloadImage(url: string, filename: string) {
-  fetch(url, {
-    headers: new Headers({
-      Origin: location.origin,
-    }),
-    mode: "cors",
-  })
-    .then((response) => response.blob())
-    .then((blob) => {
-      let blobUrl = window.URL.createObjectURL(blob);
-      downloadData(blobUrl, filename);
-    })
-    .catch((e) => console.error(e));
-}

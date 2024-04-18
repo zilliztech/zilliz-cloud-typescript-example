@@ -12,8 +12,8 @@ Prerequisites:
 Clone the repository and install the dependencies.
 
 ```
-git clone git@github.com:zilliztech/semantic-search-example.
-cd semantic-search-example
+git clone git@github.com:zilliztech/semantic-image-search
+cd semantic-image-search
 yarn
 ```
 
@@ -26,7 +26,7 @@ URI=YOUR_MILVUS_URI
 TOKEN=USERNAME:PASSWORD or zilliz cloud api key
 ```
 
-If you are running the example locally, set the above environment variables in either the `.env.development` file (for `yarn dev`) or the `.env.production` file (for `yarn build`).
+If you are running the example locally, set the above environment variables in the `.env.local` file (for `yarn dev`)
 
 If using publish on Vercel , you need to set the corresponding environment variables in Vercel's settings.
 
@@ -41,47 +41,130 @@ npm run start
 
 ## Application structure
 
+### Data Init
+To initialize the data, you can use the `loadImages.mjs` script. This script reads the `photo.tsv` which is download from Hugging Face, embeds all the images, and inserts them into the Milvus Collection. Please note that this process may take some time, especially if you have a large number of images.
+
+To run the script, execute the following command:
+```
+node loadImages.mjs
+```
+
 ### Utilities
 
-- `embedder`: This class leverages a pipeline from the [@xenova/transformers](https://www.npmjs.com/package/@xenova/transformers) library to generate embeddings from the input text. It employs the [Xenova/all-MiniLM-L6-v2](https://huggingface.co/Xenova/all-MiniLM-L6-v2) model for this transformation. And it offers a method to generate embeddings from a single string.
+- `embedder`: This class leverages a pipeline from the [@xenova/transformers](https://www.npmjs.com/package/@xenova/transformers) library to generate embeddings. It employs the [Xenova/clip-vit-base-patch16](https://huggingface.co/Xenova/clip-vit-base-patch16) model for this transformation. And it offers methods to generate embeddings from a single string or image data.
 
 ```javascript
-import { AllTasks, pipeline } from "@xenova/transformers";
+import {
+  AutoProcessor,
+  AutoTokenizer,
+  CLIPTextModelWithProjection,
+  CLIPVisionModelWithProjection,
+  PreTrainedModel,
+  PreTrainedTokenizer,
+  Processor,
+  RawImage,
+} from "@xenova/transformers";
 
-// Embedder class for feature extraction
+/**
+ * The Embedder class provides methods to embed text and images using the CLIP model.
+ */
 class Embedder {
-  // Declare a pipeline for feature extraction
-  private pipe: AllTasks["feature-extraction"] | null = null;
+  private modelId = "Xenova/clip-vit-base-patch16";
+  private tokenizer: PreTrainedTokenizer | null = null;
+  private textModel: PreTrainedModel | null = null;
+  private processor: Processor | null = null;
+  private visionModel: PreTrainedModel | null = null;
 
-  // Initialize the pipeline
+  /**
+   * Initializes the Embedder by loading the tokenizer and models.
+   */
   async init() {
-    // The pipeline is initialized with the "feature-extraction" task and the "Xenova/all-MiniLM-L6-v2" model
-    this.pipe = await pipeline("feature-extraction", "Xenova/all-MiniLM-L6-v2");
+    // Load tokenizer and text model
+    if (!this.tokenizer) {
+      this.tokenizer = await AutoTokenizer.from_pretrained(this.modelId);
+    }
+
+    if (!this.textModel) {
+      this.textModel = await CLIPTextModelWithProjection.from_pretrained(
+        this.modelId,
+        {
+          quantized: false,
+        }
+      );
+    }
+    if (!this.processor) {
+      this.processor = await AutoProcessor.from_pretrained(this.modelId);
+    }
+
+    if (!this.visionModel) {
+      this.visionModel = await CLIPVisionModelWithProjection.from_pretrained(
+        this.modelId,
+        {
+          quantized: false,
+        }
+      );
+    }
   }
 
-  // Method to embed a single string
+  /**
+   * Embeds the given text and returns the query embedding.
+   * @param text - The text to embed.
+   * @returns The query embedding as an array.
+   * @throws If there is an error in embedding the text.
+   */
   async embed(text: string) {
-    // If the pipeline is not initialized, initialize it
-    if (!this.pipe) {
-      await this.init();
+    try {
+      if (!this.tokenizer || !this.textModel) {
+        await this.init();
+      }
+      // Run tokenization
+      let text_inputs = this.tokenizer!(text, {
+        padding: true,
+        truncation: true,
+      });
+
+      // Compute embeddings
+      const { text_embeds } = await this.textModel!(text_inputs);
+      const query_embedding = text_embeds.tolist()[0];
+      return query_embedding;
+    } catch (error) {
+      throw new Error("Error in embedding text: " + error);
     }
-    // Use the pipeline to extract features from the text
-    const result =
-      this.pipe &&
-      (await this.pipe(text, { pooling: "mean", normalize: true }));
-    // Return an object with the original text and the extracted features
-    return {
-      text,
-      values: Array.from(result?.data || []),
-    };
+  }
+
+  /**
+   * Embeds the image from the given URL and returns the image embedding.
+   * @param url - The URL of the image to embed.
+   * @returns The image embedding as an array.
+   * @throws If there is an error in embedding the image or no image URL is provided.
+   */
+  async embedImage(url: string) {
+    if (!url) {
+      throw new Error("No image url provided");
+    }
+    try {
+      if (!this.processor || !this.visionModel) {
+        await this.init();
+      }
+      // read image data
+      const rawImage = await RawImage.read(url);
+
+      let image_inputs = await this.processor!(rawImage);
+
+      // Compute embeddings
+      const { image_embeds } = await this.visionModel!(image_inputs);
+      const imageVector = image_embeds.tolist()[0] || [];
+      return imageVector;
+    } catch (error) {
+      throw new Error("Error in embedding image: " + error);
+    }
   }
 }
 
-// Create a singleton instance of the Embedder class
 const embedder = new Embedder();
 
-// Export the embedder instance
 export { embedder };
+
 
 ```
 
@@ -91,31 +174,18 @@ export { embedder };
 import {
   InsertReq,
   MilvusClient,
-  MutationResult,
-  QueryReq,
   SearchSimpleReq,
 } from "@zilliz/milvus2-sdk-node";
-import { embedder } from "./embedder";
 
 // Define constants for the Milvus client
-const DIM = 384; // model Xenova/all-MiniLM-L6-v2 embedding dimension
-export const COLLECTION_NAME = "semantic_search_example"; // example collection name
+const DIM = 512; // model Xenova/clip-vit-base-patch16 embedding dimension
+export const COLLECTION_NAME = "semantic_image_search"; // example collection name
 export const VECTOR_FIELD_NAME = "vector"; // verctor field name
 export const METRIC_TYPE = "COSINE";
 export const INDEX_TYPE = "AUTOINDEX";
 
-export enum CSV_KEYS {
-  QUESTION = "question",
-  ANSWER = "answer",
-  CSV_ID = "csvId",
-}
-
 class Milvus {
   private _client: MilvusClient | undefined;
-  private _MAX_INSERT_COUNT = 100;
-  private _insert_progress = 0;
-  private _is_inserting = false;
-  private _error_msg = "";
 
   constructor() {
     if (!this._client) {
@@ -182,17 +252,6 @@ class Milvus {
     }
   }
 
-  // List all collections
-  public async listCollections() {
-    const res = await this._client?.listCollections();
-    return res;
-  }
-
-  // Query data from a collection
-  public async query(data: QueryReq) {
-    return await this._client?.query(data);
-  }
-
   // Search for data in a collection
   public async search(data: SearchSimpleReq) {
     return await this._client?.search({
@@ -209,83 +268,6 @@ class Milvus {
       throw error;
     }
   }
-
-  // Insert data in batches, for example, 1000 data, insert 100 each time
-  public async batchInsert(
-    texts: { [key in CSV_KEYS]: string }[],
-    startIndex: number
-  ): Promise<MutationResult | undefined> {
-    try {
-      // Total number of texts to be inserted
-      const total = texts.length;
-      // Calculate the end index for the current batch
-      const endIndex = startIndex + this._MAX_INSERT_COUNT;
-      // Slice the texts array to get the current batch
-      const insertTexts = texts.slice(startIndex, endIndex);
-      // Set the inserting flag to true
-      this._is_inserting = true;
-
-      // If it's the first batch, reset the progress
-      if (startIndex === 0) {
-        this._insert_progress = 0;
-      }
-      // Array to hold the data to be inserted
-      const insertDatas = [];
-      for (let i = 0; i < insertTexts.length; i++) {
-        const row = insertTexts[i] as any;
-        // Embed the question into a vector using the all-MiniLM-L6-v2 module
-        const data = await embedder.embed(row[CSV_KEYS.QUESTION]);
-
-        // Prepare the data to be inserted into the Milvus collection
-        insertDatas.push({
-          vector: data.values,
-          /**
-           * The question and answer are stored as dynamic JSON.
-           * They won't appear in the schema, but can be retrieved during a similarity search.
-           * */
-          question: row[CSV_KEYS.QUESTION],
-          answer: row[CSV_KEYS.ANSWER],
-        });
-      }
-
-
-      // Insert the data into Milvus
-      const res = await milvus.insert({
-        fields_data: insertDatas,
-        collection_name: COLLECTION_NAME,
-      });
-      // Update the progress
-      this._insert_progress = Math.floor((endIndex / total) * 100);
-
-      // If not all data has been inserted, continue inserting
-      if (endIndex < total) {
-        return await this.batchInsert(texts, endIndex + 1);
-      }
-      // If all data has been inserted, update the progress and inserting flag
-      this._insert_progress = 100;
-      this._is_inserting = false;
-      return res;
-    } catch (error) {
-      this._insert_progress = 0;
-      this._is_inserting = false;
-      this._error_msg = (error as any).message || "Insert failed";
-    }
-  }
-
-  // Get the progress of the insert operation
-  get insertProgress() {
-    return this._insert_progress;
-  }
-
-  // Check if data is being inserted
-  get isInserting() {
-    return this._is_inserting;
-  }
-
-  // Get the error message
-  get errorMsg() {
-    return this._error_msg;
-  }
 }
 
 // Create a singleton instance of the Milvus class
@@ -297,21 +279,18 @@ export { milvus };
 
 ### APIs
 
-- `/api/milvus`: This endpoint establishes a connection to Milvus, creates a collection named `semantic_search_example`, sets up an AUTO_INDEX index, and loads the collection into memory.
-
-- `/api/milvus/insert`: This endpoint embeds a single text and inserts it into the collection.
-
-- `/api/milvus/loadCsv`: This endpoint processes the local file `/public/test.csv`, originally sourced from [Kaggle](https://www.kaggle.com/datasets/veeralakrishna/questionanswer-combination). It transforms the 'question' field into a vector and asynchronously imports the data into the Milvus collection in batches. The progress of the import operation can be monitored via the `/api/milvus/loadCsv/progress` endpoint.
+- `/api/milvus`: This endpoint establishes a connection to Milvus, creates a collection named `semantic_search_example` with AUTO_INDEX index, COSINE metric type, and loads the collection into memory.
 
 - `/api/milvus/search`: This endpoint takes text from the body of the request, embeds it, and performs a search within the Milvus collection.
 
-### Pages
+### Client
+
+- `ImageGrid.tsx`: Renders a grid of images. 
 
 - `layout.tsx`: This file uses NextUIProvider as the provider, enabling the use of next-ui.
 
-- `page.tsx`: This file must be a server component. It embeds the `hello world` string during the build process, which allows for the download of the `Xenova/all-MiniLM-L6-v2` model.
+- `search.tsx`: This file provides a straightforward semantic search UI, enabling users to perform semantic image searches.
 
-- `search.tsx`: This file provides a straightforward semantic search UI, enabling users to perform semantic searches and insert their own data.
 
 ### Next config
 
