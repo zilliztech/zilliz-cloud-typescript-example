@@ -4,8 +4,7 @@ In this example we will see how to use Milvus or Zilliz Cloud for semantic image
 
 ## Deploy to Vercel
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/nameczz/milvus-node-demos/tree/master/semantic-image-search-client&repository-name=semantic-image-search-client&env=URI,TOKEN)
-
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/zilliztech/zilliz-cloud-typescript-example/tree/master/semantic-image-search-client&repository-name=semantic-image-search-client&env=URI,TOKEN)
 
 ## Setup
 
@@ -17,8 +16,8 @@ Prerequisites:
 Clone the repository and install the dependencies.
 
 ```
-git clone git@github.com:zilliztech/semantic-image-search-client
-cd semantic-image-search-client
+git clone git@github.com:zilliztech/zilliz-cloud-typescript-example
+cd zilliz-cloud-typescript-example
 yarn
 ```
 
@@ -47,9 +46,11 @@ npm run start
 ## Application structure
 
 ### Data Init
+
 To initialize the data, you can use the `loadImages.mjs` script. This script reads the `photo.tsv` which is download from Hugging Face, embeds all the images, and inserts them into the Milvus Collection. Please note that this process may take some time, especially if you have a large number of images.
 
 To run the script, execute the following command:
+
 ```
 node loadImages.mjs
 ```
@@ -175,12 +176,11 @@ export { milvus };
 
 - `worker.js`: This file runs the model in the browser. It requires downloading the model at the first time and supports embedding text and image using the Xenova/clip-vit-base-patch16 model.
 
-- `ImageGrid.tsx`: Renders a grid of images. 
+- `ImageGrid.tsx`: Renders a grid of images.
 
 - `layout.tsx`: This file uses NextUIProvider as the provider, enabling the use of next-ui.
 
 - `search.tsx`: This file provides a straightforward semantic search UI, enabling users to perform semantic image searches.
-
 
 ### Next config
 
@@ -213,5 +213,4 @@ const nextConfig = {
 };
 
 module.exports = nextConfig;
-
 ```

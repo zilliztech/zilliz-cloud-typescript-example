@@ -12,8 +12,8 @@ Prerequisites:
 Clone the repository and install the dependencies.
 
 ```
-git clone git@github.com:zilliztech/semantic-image-search
-cd semantic-image-search
+git clone git@github.com:zilliztech/zilliz-cloud-typescript-example
+cd zilliz-cloud-typescript-example
 yarn
 ```
 
@@ -42,9 +42,11 @@ npm run start
 ## Application structure
 
 ### Data Init
+
 To initialize the data, you can use the `loadImages.mjs` script. This script reads the `photo.tsv` which is download from Hugging Face, embeds all the images, and inserts them into the Milvus Collection. Please note that this process may take some time, especially if you have a large number of images.
 
 To run the script, execute the following command:
+
 ```
 node loadImages.mjs
 ```
@@ -285,12 +287,11 @@ export { milvus };
 
 ### Client
 
-- `ImageGrid.tsx`: Renders a grid of images. 
+- `ImageGrid.tsx`: Renders a grid of images.
 
 - `layout.tsx`: This file uses NextUIProvider as the provider, enabling the use of next-ui.
 
 - `search.tsx`: This file provides a straightforward semantic search UI, enabling users to perform semantic image searches.
-
 
 ### Next config
 
