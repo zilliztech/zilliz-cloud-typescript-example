@@ -200,24 +200,29 @@ export default function SearchPage() {
         <div className="flex gap-2">
           {/* Note: API requests may timeout on Vercel's free plan as it has a maximum timeout limit of 10 seconds*/}
           {SUPPORT_IMPORT && (
-            <Button
-              onClick={() => {
-                loadCsv();
-              }}
-              isLoading={loading.insertCsv}
-              isDisabled={loading.page}
-              variant="faded"
-            >
-              {!loading.insertCsv
-                ? `Load 1000 QAs`
-                : `Embedding and inserting ...(${insertProgress}%)`}
-            </Button>
+            <>
+              <Button
+                onClick={() => {
+                  loadCsv();
+                }}
+                isLoading={loading.insertCsv}
+                isDisabled={loading.page}
+                variant="faded"
+              >
+                {!loading.insertCsv
+                  ? `Load 1000 QAs`
+                  : `Embedding and inserting ...(${insertProgress}%)`}
+              </Button>
+              {/* Button to open the insert data modal */}
+              <Button
+                onPress={onOpen}
+                variant="faded"
+                isDisabled={loading.page}
+              >
+                Insert data
+              </Button>
+            </>
           )}
-
-          {/* Button to open the insert data modal */}
-          <Button onPress={onOpen} variant="faded" isDisabled={loading.page}>
-            Insert data
-          </Button>
         </div>
       </div>
 
