@@ -12,9 +12,6 @@ export const dynamic = "force-dynamic";
  * @returns A NextResponse object containing the response data.
  */
 export async function GET(req: NextRequest) {
-  if (process.env.SUPPORT_INSERT === "false") {
-    return NextResponse.json({ error: "Insert operation is not supported" });
-  }
   const searchParams = req.nextUrl.searchParams;
   // Client get only csv data, for random question
   const onlyCsv = searchParams.get("onlyCsv") || false;
@@ -30,6 +27,11 @@ export async function GET(req: NextRequest) {
     });
     if (onlyCsv) {
       return NextResponse.json(parsedData.data);
+    }
+    if (process.env.SUPPORT_INSERT === "false") {
+      return NextResponse.json({
+        error: "Insert operation is not supported",
+      });
     }
     milvus.batchInsert(parsedData.data as [], 0);
     return NextResponse.json({ status: "success" });
