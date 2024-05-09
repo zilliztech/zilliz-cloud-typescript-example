@@ -7,6 +7,9 @@ export const dynamic = "force-dynamic";
 
 export async function POST(req: NextRequest) {
   try {
+    if (process.env.SUPPORT_INSERT === "false") {
+      return NextResponse.json({ error: "Insert operation is not supported" });
+    }
     const { question, answer } = await req.json();
 
     // Use the embedder utility to convert the question into a vector

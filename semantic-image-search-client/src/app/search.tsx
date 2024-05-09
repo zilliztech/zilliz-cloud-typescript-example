@@ -1,7 +1,7 @@
 "use client";
-import { Button, CircularProgress, Input, Modal } from "@nextui-org/react";
+import { Button, CircularProgress, Input } from "@nextui-org/react";
 import axios from "axios";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import React from "react";
 import { ImageGrid, ImageType } from "./components/ImageGrid";
 
@@ -11,7 +11,6 @@ export default function SearchPage() {
   const [value, setValue] = useState("");
   const [data, setData] = useState<ImageType[]>([]);
   const [searchVectors, setSearchVectors] = useState<number[]>([]);
-  const [progress, setProgress] = useState(0);
   const [loading, setLoading] = useState({
     search: false,
     imageSearch: false,
@@ -34,10 +33,6 @@ export default function SearchPage() {
       switch (e.data.status) {
         case "initiate":
           setReady(false);
-          break;
-        case "progress":
-          const progress = Math.floor(e.data.progress);
-          setProgress(progress);
           break;
         case "ready":
           setReady(true);
@@ -134,8 +129,8 @@ export default function SearchPage() {
       />
       {ready === false && (
         <div className="z-10 fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex items-center justify-center">
-          <div className="text-white text-2xl font-bold">
-            {`Loading models ${progress}%...`}
+          <div className="flex text-white text-2xl font-bold">
+            {`Loading model ...`}
           </div>
         </div>
       )}

@@ -12,6 +12,9 @@ export const dynamic = "force-dynamic";
  * @returns A NextResponse object containing the response data.
  */
 export async function GET(req: NextRequest) {
+  if (process.env.SUPPORT_INSERT === "false") {
+    return NextResponse.json({ error: "Insert operation is not supported" });
+  }
   const searchParams = req.nextUrl.searchParams;
   // Client get only csv data, for random question
   const onlyCsv = searchParams.get("onlyCsv") || false;
