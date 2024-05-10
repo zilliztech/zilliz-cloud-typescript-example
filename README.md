@@ -6,8 +6,8 @@ These applications use the [@zilliz/milvus2-sdk-node](https://github.com/milvus-
 
 ## Support Apps
 
-| Name                                                                     | Model                 |
-| ------------------------------------------------------------------------ | --------------------- |
-| [semantic-search-example](./semantic-search-example/README.md)           | all-MiniLM-L6-v2      |
-| [semantic-image-search](./semantic-image-search/README.md)               | clip-vit-base-patch16 |
-| [semantic-image-search-client](./semantic-image-search-client/README.md) | clip-vit-base-patch16 |
+| Name                                                                     | Demo                                                   | Model                 |
+| ------------------------------------------------------------------------ | ------------------------------------------------------ | --------------------- |
+| [semantic-search-example](./semantic-search-example/README.md)           | https://zilliz-semantic-search-example.vercel.app      | all-MiniLM-L6-v2      |
+| [semantic-image-search](./semantic-image-search/README.md)               |                                                        | clip-vit-base-patch16 |
+| [semantic-image-search-client](./semantic-image-search-client/README.md) | https://zilliz-semantic-image-search-client.vercel.app | clip-vit-base-patch16 |
